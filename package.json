@@ -1,0 +1,26 @@
+{
+  "name": "app_marks",
+  "version": "1.0.0",
+  "description": "Project for practics",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/517ANT38/app_marks.git"
+  },
+  "keywords": [
+    "marks"
+  ],
+  "author": "Tashchilin Anton,Farafonow Artem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/517ANT38/app_marks/issues"
+  },
+  "homepage": "https://github.com/517ANT38/app_marks#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.32.1"
+  }
+}
