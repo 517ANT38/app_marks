@@ -1,4 +1,5 @@
 const {db}=require("../db");
+const ObjectSight = require("./ObjectSight");
 const Question=db.connection.define('Question',
     {
         id:{
@@ -14,5 +15,6 @@ const Question=db.connection.define('Question',
         freeTableName: true
     }
 );
+Question.hasOne(ObjectSight);
 Question.sync();
 module.exports=Question;

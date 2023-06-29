@@ -1,4 +1,5 @@
 const {db}=require('../db');
+const Question = require('./Question');
 const ObjectSight=db.connection.define('Object_Sight',
     {
         id:{
@@ -17,5 +18,6 @@ const ObjectSight=db.connection.define('Object_Sight',
         freezeTableName:true
     }
 );
+ObjectSight.belongsTo(Question);
 ObjectSight.sync(); 
 module.exports=ObjectSight;
