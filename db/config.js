@@ -3,7 +3,7 @@ const connection=new Sequelize(
     {
         database:process.env.DB,
         username:process.env.USERNAME_DB,
-        port:process.env.PORT,
+        port:process.env.PORT_DB,
         dialect:process.env.DIACLECT,
         password:process.env.PASSWORD_DB,
         host:process.env.HOST
