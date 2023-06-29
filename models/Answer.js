@@ -4,7 +4,7 @@ const User = require("./User");
 const Answer=db.connection.define(
     'Answer',
     {
-        state_answer:{
+        stateAnswer:{
             type:db.types.BOOLEAN
         }
     },

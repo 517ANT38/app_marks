@@ -8,7 +8,7 @@ const ObjectSight=db.connection.define('Object_Sight',
             autoIncrementIdentity:true,
             type:db.types.INTEGER
         },
-        url_img:{
+        urlImg:{
             type:db.types.STRING(80),        
         },
         description:{
