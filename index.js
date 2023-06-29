@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser=require("body-parser");
 const models=require("./models");
 const controllers=require("./controllers");
+const services=require("./services");
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 for(let name in controllers){
-   app.use(`/${name}`,controllers[name]())
+   app.use(`/${name}`,controllers[name](router,services,models));
 }
 
 
