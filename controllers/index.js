@@ -3,7 +3,7 @@ const question=require("./questionController");
 const user=require("./userController");
 const objectSight=require("./objectSightController");
 
-module.exports.controllers={
+module.exports={
     answer,
     question,
     user,

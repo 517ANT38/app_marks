@@ -4,7 +4,7 @@ const Question=require("./Question");
 const Answer=require("./Answer");
 const User=require("./User");
 
-module.exports.models={
+module.exports={
     Address,
     ObjectSight,
     Question,
