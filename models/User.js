@@ -1,4 +1,5 @@
 const {db}=require("../db");
+const Answer = require("./Answer");
 const User=db.connection.define(
     'User',
     {
@@ -21,6 +22,7 @@ const User=db.connection.define(
         freeTableName: true
     }
 );
+User.hasMany(Answer);
 User.sync();
 module.exports=User;
 

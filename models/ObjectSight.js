@@ -1,4 +1,5 @@
 const {db}=require('../db');
+const Address = require('./Address');
 const Question = require('./Question');
 const ObjectSight=db.connection.define('Object_Sight',
     {
@@ -15,9 +16,21 @@ const ObjectSight=db.connection.define('Object_Sight',
         },
     },
     {
-        freezeTableName:true
+        freezeTableName:true,
+        indexes:[
+            {
+                unique:true,
+                fields:["addressId"]
+            }
+        ]
     }
 );
-ObjectSight.belongsTo(Question);
+ObjectSight.hasOne(Question);
+ObjectSight.belongsTo(Address,{
+    foreignKey:{
+        name:"addressId",
+        allowNull:false
+    }
+});
 ObjectSight.sync(); 
 module.exports=ObjectSight;

@@ -1,4 +1,5 @@
 const {db}=require("../db");
+const Answer = require("./Answer");
 const ObjectSight = require("./ObjectSight");
 const Question=db.connection.define('Question',
     {
@@ -12,9 +13,21 @@ const Question=db.connection.define('Question',
         }
     },
     {
-        freeTableName: true
+        freeTableName: true,
+        indexes:[
+            {
+                unique:true,
+                fields:["quetId"]
+            }
+        ]
     }
 );
-Question.hasOne(ObjectSight);
+Question.belongsTo(ObjectSight,{
+    foreignKey:{
+        name:"quetId",
+        allowNull:false
+    }
+});
+Question.hasMany(Answer);
 Question.sync();
 module.exports=Question;
