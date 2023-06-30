@@ -9,11 +9,11 @@ const connection=new Sequelize(
         host:process.env.HOST
     }
 );
-try {
-    await connection.authenticate()
-    console.log('The connection to the database was successfully established')
-  } catch (e) {
-    console.error('Unable to connect to the database: ', e)
-  }
+
+connection.authenticate()
+.then(x=>console.log('The connection to the database was successfully established'))
+.catch(x=>console.error('Unable to connect to the database: ', e))
+    
+ 
 
 module.exports={connection,types:DataTypes}
