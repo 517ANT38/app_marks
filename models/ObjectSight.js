@@ -25,12 +25,5 @@ const ObjectSight=db.connection.define('Object_Sight',
         ]
     }
 );
-ObjectSight.hasOne(Question);
-ObjectSight.belongsTo(Address,{
-    foreignKey:{
-        name:"addressId",
-        allowNull:false
-    }
-});
-ObjectSight.sync(); 
+
 module.exports=ObjectSight;

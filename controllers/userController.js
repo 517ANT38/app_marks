@@ -1,6 +1,6 @@
 module.exports=({router,services,models})=>{
-    const routers=router();
+   // const routers=router();
 
 
-    return routers;
+    //return routers;
 };

@@ -12,15 +12,5 @@ const Answer=db.connection.define(
         freezeTableName:true
     }
 );
-Answer.belongsTo(User,{
-    foreignKey:{
-        allowNull:false
-    }
-});
-Answer.belongsTo(Question,{
-    foreignKey:{
-        allowNull:false
-    }
-});
-Answer.sync();
+
 module.exports=Answer;

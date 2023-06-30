@@ -22,6 +22,4 @@ const Address=db.connection.define(
     }
 );
 
-Address.hasOne(ObjectSight);
-Address.sync();
 module.exports=Address;

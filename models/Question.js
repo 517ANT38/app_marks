@@ -22,12 +22,5 @@ const Question=db.connection.define('Question',
         ]
     }
 );
-Question.belongsTo(ObjectSight,{
-    foreignKey:{
-        name:"quetId",
-        allowNull:false
-    }
-});
-Question.hasMany(Answer);
-Question.sync();
+
 module.exports=Question;

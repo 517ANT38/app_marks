@@ -22,7 +22,6 @@ const User=db.connection.define(
         freeTableName: true
     }
 );
-User.hasMany(Answer);
-User.sync();
+
 module.exports=User;
 
