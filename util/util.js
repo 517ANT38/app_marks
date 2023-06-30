@@ -1,13 +1,10 @@
-const blobToFile = (theBlob, fileName)=> {       
-    return new File(
-        theBlob , // cast as any
-        fileName, 
-        {
-            lastModified: new Date().getTime(),
-            type: theBlob.type 
-        }
-    )
+const blobToBuffer = (theBlob)=> {       
+    return new ArrayBuffer(theBlob)
+}
+const bufferToBlob=(theBuff)=>{
+    return new Blob([theBuff]);
 }
 module.exports={
-    blobToFile
+    blobToBuffer,
+    bufferToBlob
 }
