@@ -1,19 +1,20 @@
-const Address=require("./Address");
-const ObjectSight=require("./ObjectSight");
-const Question=require("./Question");
-const Answer=require("./Answer");
-const User=require("./User");
+const address=require("./address");
+const objectSight=require("./objectSight");
+const question=require("./question");
+const answer=require("./answer");
+const user=require("./user");
 const  init_model  = require("./init");
 
 
 
 
 const models={
-    Address,
-    ObjectSight,
-    Question,
-    Answer,
-    User
+    address,
+    objectSight,
+    question,
+    user,
+    answer,
+    
 }
 init_model(models);
 module.exports=models;

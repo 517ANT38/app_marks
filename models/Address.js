@@ -1,15 +1,8 @@
 const {db}=require("../db");
-const ObjectSight=require("./ObjectSight");
-
-
-const Address=db.connection.define(
+const address=db.connection.define(
     'Address',
     {
-        id:{
-            primaryKey:true,
-            autoIncrementIdentity:true,
-            type:db.types.INTEGER
-        },
+        
         address:{
             type:db.types.STRING
         },
@@ -22,4 +15,4 @@ const Address=db.connection.define(
     }
 );
 
-module.exports=Address;
+module.exports=address;

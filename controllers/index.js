@@ -1,11 +1,11 @@
-const answer=require("./answerController");
-const question=require("./questionController");
-const user=require("./userController");
-const objectSight=require("./objectSightController");
+const answers=require("./answerController");
+const questions=require("./questionController");
+const users=require("./userController");
+const objectSights=require("./objectSightController");
 
 module.exports={
-    answer,
-    question,
-    user,
-    objectSight
+    answers,
+    questions,
+    users,
+    objectSights
 };

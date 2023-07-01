@@ -1,9 +1,8 @@
 const {db}=require("../db");
-const Question = require("./Question");
-const User = require("./User");
-const Answer=db.connection.define(
+const answer=db.connection.define(
     'Answer',
     {
+        
         stateAnswer:{
             type:db.types.BOOLEAN
         }
@@ -13,4 +12,4 @@ const Answer=db.connection.define(
     }
 );
 
-module.exports=Answer;
+module.exports=answer;

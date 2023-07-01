@@ -1,13 +1,8 @@
 const {db}=require("../db");
-const Answer = require("./Answer");
-const User=db.connection.define(
+const user=db.connection.define(
     'User',
     {
-        id:{
-            primaryKey:true,
-            autoIncrementIdentity:true,
-            type:db.types.INTEGER
-        },
+        
         name:{
             type:db.types.STRING(50),
             allowNull:false,
@@ -23,5 +18,5 @@ const User=db.connection.define(
     }
 );
 
-module.exports=User;
+module.exports=user;
 

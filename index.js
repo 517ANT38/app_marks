@@ -14,9 +14,9 @@ const app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-// for(let name in controllers){
-//    app.use(`/${name}`,controllers[name](()=>router(),services,models));
-// }
+for(let name in controllers){
+   app.use(`/${name}`,controllers[name]({router,services,models}));
+}
 
 
 

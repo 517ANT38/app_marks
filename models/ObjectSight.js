@@ -1,13 +1,7 @@
 const {db}=require('../db');
-const Address = require('./Address');
-const Question = require('./Question');
-const ObjectSight=db.connection.define('Object_Sight',
+const objectSight=db.connection.define('Object_Sight',
     {
-        id:{
-            primaryKey:true,
-            autoIncrementIdentity:true,
-            type:db.types.INTEGER
-        },
+        
         urlImg:{
             type:db.types.STRING(80),        
         },
@@ -17,13 +11,8 @@ const ObjectSight=db.connection.define('Object_Sight',
     },
     {
         freezeTableName:true,
-        indexes:[
-            {
-                unique:true,
-                fields:["addressId"]
-            }
-        ]
+        
     }
 );
 
-module.exports=ObjectSight;
+module.exports=objectSight;
