@@ -1,5 +1,5 @@
 module.exports=async(models)=>{
-   
+    
     models.address.hasOne(models.objectSight);
     models.objectSight.belongsTo(models.address);
     models.question.belongsTo(models.objectSight,{

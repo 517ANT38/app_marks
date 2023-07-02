@@ -19,4 +19,4 @@ connection.sync()
 .catch(x=>console.error('Unable to connect to the database: ', x));
  
 
-module.exports={connection,types:DataTypes}
+module.exports={connection:connection,types:DataTypes}
