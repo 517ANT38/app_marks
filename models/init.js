@@ -2,9 +2,17 @@ module.exports=async(models)=>{
    
     models.address.hasOne(models.objectSight);
     models.objectSight.belongsTo(models.address);
-    models.question.belongsTo(models.objectSight);
+    models.question.belongsTo(models.objectSight,{
+        foreignKey:{
+            allowNull:false
+        }
+    });
     models.user.hasMany(models.answer);
-    models.answer.belongsTo(models.user);
+    models.answer.belongsTo(models.user,{
+        foreignKey:{
+            allowNull:false
+        }
+    });
     models.question.hasMany(models.answer);
     models.objectSight.hasOne(models.question)
     models.answer.belongsTo(models.question,{
