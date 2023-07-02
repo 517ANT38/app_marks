@@ -7,12 +7,10 @@ module.exports=()=>({
         let b=blobToBuffer(data);
         let name=createNameFile(data);
         
-        try{
-            await fs.mkdir(path.join(__dirname,"static"),{recursive:true});
-            await fs.writeFileSync(`./name`,b);
-        }catch(err){
-            console.error(err);
-        }
+        
+        await fs.mkdir(path.join(__dirname,"static"),{recursive:true});
+        await fs.writeFileSync(`./name`,b);
+        
         return name;
     },
     read:async(uuid)=>{

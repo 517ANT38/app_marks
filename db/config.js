@@ -13,10 +13,10 @@ const connection=new Sequelize(
 
 connection.authenticate()
 .then(x=>console.log('The connection to the database was successfully established'))
-.catch(x=>console.error('Unable to connect to the database: ', x))
+.catch(x=>console.error('Unable to connect to the database: ', x));
 connection.sync()
 .then(x=>console.log('The connection to the database was successfully'))   
-.catch(x=>console.error('Unable to connect to the database: ', x))
+.catch(x=>console.error('Unable to connect to the database: ', x));
  
 
 module.exports={connection,types:DataTypes}
