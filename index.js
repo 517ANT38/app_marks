@@ -10,12 +10,12 @@ const PORT = process.env.PORT || 8080;
 const router=express.Router;
 const app=express();
 
-
+app.use("/images",express.static(__dirname+"/static"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 for(let name in controllers){
-   app.use(`/${name}`,controllers[name]({router,services,models}));
+   app.use(`/api/${name}`,controllers[name]({router,services,models}));
 }
 
 

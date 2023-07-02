@@ -14,8 +14,8 @@ module.exports=({router,services,models})=>{
     });
     routers.post("/new",async(req,res)=>{
         const {img,...d}=req.body;
-        const url_img=await workFile.write(img);
-        d.url_img=url_img;
+        const name=await serviceFile.write(img);
+        d.url_img=name;
         const data=await service.add(d);
         res.send(data);
     });
