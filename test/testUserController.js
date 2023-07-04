@@ -20,7 +20,7 @@ describe("users",()=>{
         it("it should POST METHOD for create user with name....",(done)=>{
             
             chai.request(server)
-                .post("/users")
+                .post("/users/new")
                 .send({name:"Anton"})
                 .end((err,res)=>{
                     res.should.have.status(200);
@@ -31,7 +31,7 @@ describe("users",()=>{
         it("it should POST METHOD for create user  not name....",(done)=>{
             
             chai.request(server)
-                .post("/users")
+                .post("/users/new")
                 .send({})
                 .end((err,res)=>{
                     res.should.have.status(400);
