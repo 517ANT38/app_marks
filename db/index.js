@@ -1,6 +1,8 @@
 const { Sequelize ,DataTypes} = require('sequelize');
 const config=require("./config");
+console.log(process.env.NODE_ENV)
 const NODE_ENV=process.env.NODE_ENV||"test";
+console.log(config)
 const connection=new Sequelize(config[NODE_ENV]);
 
 connection.authenticate()

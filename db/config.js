@@ -1,3 +1,4 @@
+require('dotenv').config();
 module.exports={
     test:{
         database:process.env.DB_TEST,

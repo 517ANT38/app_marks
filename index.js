@@ -1,6 +1,8 @@
+
 const express = require("express");
+
 const expressOasGenerator = require('express-oas-generator');
-require('dotenv').config();
+
 const bodyParser=require("body-parser");
 const models=require("./models");
 const controllers=require("./controllers");
