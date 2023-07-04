@@ -1,22 +1,29 @@
-const {db}=require('../db');
-const objectSight=db.connection.define('Object_Sight',
-    {
-        
-        urlImg:{
-            type:db.types.STRING(80),        
-        },
-        description:{
-            type:db.types.STRING(600)
-        },
-        AddressId:{
-            unique:true,
-            type:db.types.INTEGER
-        }
-    },
-    {
-        freezeTableName:true,
-        
-    }
-);
 
+const objectSight=({connection,types})=>{
+    const res=connection.define(
+        'Object_Sight',
+        {
+            
+            urlImg:{
+                type:types.STRING(80),        
+            },
+            description:{
+                type:types.STRING(600)
+            },
+            AddressId:{
+                unique:true,
+                type:types.INTEGER
+            }
+        },
+        {
+            freezeTableName:true,
+            
+        }
+    );
+    res.associate=({address,question})=>{
+        res.belongsTo(address);    
+        res.hasOne(question);
+    };
+    return res;
+}
 module.exports=objectSight;

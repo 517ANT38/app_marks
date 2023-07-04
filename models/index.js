@@ -14,9 +14,8 @@ const models={
     objectSight,
     question,
     user,
-    answer,
-    vNameCountAnswer
+    answer
     
 }
-init_model(models);
-module.exports=models;
+
+module.exports=init_model(models);

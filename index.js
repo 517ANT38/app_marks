@@ -35,4 +35,6 @@ app.use((err,req,res,next)=>{
 
 app.listen(PORT,()=>{
    console.log(`Simple Express app listening on port ${PORT}!`)
-})
+});
+
+module.exports.app=app;

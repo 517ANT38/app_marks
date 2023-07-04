@@ -1,6 +1,13 @@
-const { Sequelize ,DataTypes} = require('sequelize');
-const connection=new Sequelize(
-    {
+module.exports={
+    test:{
+        database:process.env.DB_TEST,
+        username:process.env.USERNAME_DB_TEST,
+        port:process.env.PORT_DB_TEST,
+        dialect:process.env.DIALECT_TEST,
+        password:process.env.PASSWORD_DB_TEST,
+        host:process.env.HOST_TEST
+    },
+    dev:{
         database:process.env.DB,
         username:process.env.USERNAME_DB,
         port:process.env.PORT_DB,
@@ -8,15 +15,12 @@ const connection=new Sequelize(
         password:process.env.PASSWORD_DB,
         host:process.env.HOST,
     },
-    
-);
-
-connection.authenticate()
-.then(x=>console.log('The connection to the database was successfully established'))
-.catch(x=>console.error('Unable to connect to the database: ', x));
-connection.sync()
-.then(x=>console.log('The connection to the database was successfully'))   
-.catch(x=>console.error('Unable to connect to the database: ', x));
- 
-
-module.exports={connection:connection,types:DataTypes}
+    prod:{
+        database:process.env.DB_PROD,
+        username:process.env.USERNAME_DB_PROD,
+        port:process.env.PORT_DB_PROD,
+        dialect:process.env.DIALECT_PROD,
+        password:process.env.PASSWORD_DB_PROD,
+        host:process.env.HOST_PROD
+    }
+}

@@ -1,18 +1,22 @@
-const {db}=require("../db");
-const address=db.connection.define(
-    'Address',
-    {
-        
-        address:{
-            type:db.types.STRING
-        },
-        x:{
-            type:db.types.DECIMAL(10,5)
-        },        
-        y:{
-            type:db.types.DECIMAL(10,5)
+const address=({connection,types})=>{
+    const res=connection.define(
+        'Address',
+        {
+            
+            address:{
+                type:types.STRING
+            },
+            x:{
+                type:types.DECIMAL(10,5)
+            },        
+            y:{
+                type:types.DECIMAL(10,5)
+            }
         }
+    );
+    res.associate=({objectSight})=>{
+        res.hasOne(objectSight);
     }
-);
-
+    return res;
+}
 module.exports=address;
