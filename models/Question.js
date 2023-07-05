@@ -7,7 +7,7 @@ const question=({connection,types})=>{
             },
             ObjectSightId:{
                 unique:true,
-                type:types.INTEGER
+                type:types.INTEGER()
             }
         },
         {

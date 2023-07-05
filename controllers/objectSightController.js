@@ -13,9 +13,12 @@ module.exports=({router,services,models})=>{
         res.send(data);
     }));
     routers.post("/new",asyncHandler(async(req,res,next)=>{
+      
         const {img,...d}=req.body;
+        
         const name=await serviceFile.write(img);
-        d.url_img=name;
+        
+        d.urlImg=name;
         const data=await service.add(d);
         res.send(data);
     }));

@@ -4,7 +4,7 @@ const address=({connection,types})=>{
         {
             
             address:{
-                type:types.STRING
+                type:types.STRING()
             },
             x:{
                 type:types.DECIMAL(10,5)

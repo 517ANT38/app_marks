@@ -1,5 +1,5 @@
 const createHttpError = require("http-errors");
-const HttpError = require("../util/httoError");
+
 
 module.exports=({user})=>({
     add:async(payload)=>{

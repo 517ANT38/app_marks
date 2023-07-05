@@ -1,21 +1,18 @@
 const { randomUUID } = require("crypto");
 
-const blobToBuffer = (theBlob)=> {       
-    return new ArrayBuffer(theBlob)
-}
-const bufferToBlob=(theBuff)=>{
-    return new Blob([theBuff]);
-};
-const fileExtensions=new Map();
-fileExtensions.set("image/jpeg",".jpg");
-fileExtensions.set("image/png",".png");
-fileExtensions.set("image/gif",".gif");
-fileExtensions.set("none",".bin");
-const createNameFile=(blob)=>{
-    const r=fileExtensions.get(blob?.type);
-    if(r==null)r=fileExtensions.get("none");
+const base64ToBuffer = s=>Buffer.from(s,'base64');
+
+const bufferToBase64=theBuff=>theBuff.toString('base64');
+
+
+const createNameFile=(img)=>{
+    const reg=/data:image\/[~_,\w]{2,}\;/g;
+    const arr=reg.exec(img);  
+    
     let uuid=randomUUID();
-    return uuid+r;
+    if(!arr)return uuid +".bin";
+    const type=arr[0].split("/")
+    return uuid+"."+type;
 }
 const asyncHandler=func => async (req, res, next) => {
     try {
@@ -27,8 +24,8 @@ const asyncHandler=func => async (req, res, next) => {
 };
 
 module.exports={
-    blobToBuffer,
-    bufferToBlob,
+    base64ToBuffer,
+    bufferToBase64,
     createNameFile,
     asyncHandler
 }

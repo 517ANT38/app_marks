@@ -1,18 +1,20 @@
 
 const objectSight=({connection,types})=>{
     const res=connection.define(
-        'Object_Sight',
+        'ObjectSight',
         {
-            
+            name:{
+                type:types.STRING()
+            },
             urlImg:{
                 type:types.STRING(80),        
             },
             description:{
                 type:types.STRING(600)
             },
-            AddressId:{
+            addressId:{
                 unique:true,
-                type:types.INTEGER
+                type:types.INTEGER()
             }
         },
         {
@@ -21,7 +23,11 @@ const objectSight=({connection,types})=>{
         }
     );
     res.associate=({address,question})=>{
-        res.belongsTo(address);    
+        res.address=res.belongsTo(address,{
+            foreignKey:{
+                allowNull:false
+            }
+        });    
         res.hasOne(question);
     };
     return res;

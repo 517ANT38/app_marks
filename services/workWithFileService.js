@@ -1,20 +1,24 @@
 const fs=require("fs/promises");
-const { blobToBuffer,bufferToBlob,createNameFile } = require("../util/util");
+const { base64ToBuffer,bufferToBase64,createNameFile } = require("../util/util");
 
 const path = require("path");
+const createHttpError = require("http-errors");
 module.exports=()=>({
     write:async(data)=>{
-        let b=blobToBuffer(data);
+        if(!data)return "";
+        
+            
+        let b=base64ToBuffer(data);
         let name=createNameFile(data);
         
         
-        await fs.mkdir(path.join(__dirname,"static"),{recursive:true});
-        await fs.writeFileSync(`./name`,b);
-        
+        await fs.mkdir(path.join("./","static"),{recursive:true});
+        await fs.writeFile(path.join("./","static",name),b);
+        console.log(path.join("./","static",name))
         return name;
     },
     read:async(uuid)=>{
         let b=await fs.readFile(path.join(__dirname,"static",uuid,".jpg"));
-        return bufferToBlob(b);
+        return bufferToBase64(b);
     }
 });

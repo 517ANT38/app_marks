@@ -10,7 +10,7 @@ module.exports=(models)=>{
         models_init[item].associate(models_init);
     }
     (async()=>{
-        console.log(models_init)
+        
         for (let item in models_init){
             await models_init[item].sync();
         }

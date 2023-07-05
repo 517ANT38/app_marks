@@ -3,7 +3,8 @@ const createHttpError = require("http-errors");
 module.exports=({objectSight})=>({
     add:async(playload)=>{
         
-        return await objectSight.create(playload);
+            return await objectSight.create(playload,{include:[objectSight.address]});
+        
     },
     findById:async(_id)=>{
         let res= await objectSight.findByPk(_id);

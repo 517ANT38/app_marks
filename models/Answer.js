@@ -4,7 +4,7 @@ const answer=({connection,types})=>{
         {
             
             stateAnswer:{
-                type:types.BOOLEAN
+                type:types.BOOLEAN()
             }
         },
         {
