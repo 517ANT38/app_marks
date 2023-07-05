@@ -6,22 +6,15 @@ module.exports={
         port:process.env.PORT_DB_TEST,
         dialect:process.env.DIALECT_TEST,
         password:process.env.PASSWORD_DB_TEST,
-        host:process.env.HOST_TEST
+        host:process.env.HOST_TEST,
+        logging: false
     },
-    dev:{
+    start:{
         database:process.env.DB,
         username:process.env.USERNAME_DB,
         port:process.env.PORT_DB,
         dialect:process.env.DIALECT,
         password:process.env.PASSWORD_DB,
         host:process.env.HOST,
-    },
-    prod:{
-        database:process.env.DB_PROD,
-        username:process.env.USERNAME_DB_PROD,
-        port:process.env.PORT_DB_PROD,
-        dialect:process.env.DIALECT_PROD,
-        password:process.env.PASSWORD_DB_PROD,
-        host:process.env.HOST_PROD
     }
 }

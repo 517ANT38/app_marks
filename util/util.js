@@ -17,10 +17,18 @@ const createNameFile=(blob)=>{
     let uuid=randomUUID();
     return uuid+r;
 }
-
+const asyncHandler=func => async (req, res, next) => {
+    try {
+        await func(req, res, next);
+    } catch (error) {
+        console.log(error)
+        next(error);
+    }
+};
 
 module.exports={
     blobToBuffer,
     bufferToBlob,
-    createNameFile
+    createNameFile,
+    asyncHandler
 }

@@ -4,8 +4,8 @@
   "description": "Project for practics",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
-    "start": "SET NODE_ENV=dev && node index.js"
+    "test": "mocha test",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

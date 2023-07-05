@@ -1,12 +1,14 @@
 const createHttpError = require("http-errors");
+const HttpError = require("../util/httoError");
 
 module.exports=({user})=>({
     add:async(payload)=>{
         try{
+            
             return await user.create(payload);
         }
         catch(e){
-            throw createHttpError(400,"Wrong format name user");
+            throw  createHttpError(400,"Wrong format name user");
         }
     },
     update:async(_id,payload)=>{

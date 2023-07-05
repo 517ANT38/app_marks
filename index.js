@@ -20,11 +20,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 for(let name in controllers){
    app.use(`/api/${name}`,controllers[name]({router,services,models}));
 }
-app.use((err,req,res,next)=>{
-   console.error(err.message);
-   console.error(err.stack);
-   next();
-})
+
 app.use((err,req,res,next)=>{
    res.status(err.status||500);
    res.json({

@@ -1,9 +1,7 @@
 const { Sequelize ,DataTypes} = require('sequelize');
 const config=require("./config");
-console.log(process.env.NODE_ENV)
-const NODE_ENV=process.env.NODE_ENV||"test";
-console.log(config)
-const connection=new Sequelize(config[NODE_ENV]);
+const p=process.argv[process.argv.length-1]||"start";
+const connection=new Sequelize(config[p]);
 
 connection.authenticate()
 .then(x=>console.log('The connection to the database was successfully established'))
