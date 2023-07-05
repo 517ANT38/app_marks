@@ -12,10 +12,7 @@ const objectSight=({connection,types})=>{
             description:{
                 type:types.STRING(600)
             },
-            addressId:{
-                unique:true,
-                type:types.INTEGER()
-            }
+            
         },
         {
             freezeTableName:true,
@@ -23,9 +20,10 @@ const objectSight=({connection,types})=>{
         }
     );
     res.associate=({address,question})=>{
-        res.address=res.belongsTo(address,{
+        res.belongsTo(address,{
             foreignKey:{
-                allowNull:false
+                allowNull:false,
+                unique:true
             }
         });    
         res.hasOne(question);
