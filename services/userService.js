@@ -12,15 +12,20 @@ module.exports=({user})=>({
         }
     },
     update:async(_id,payload)=>{
-        try{    
-            let res=await user.update(payload,{where:{id:_id}});
-            if(res[0]==0)
-                throw createHttpError(404,`User with id=${_id} not found`);
-            return res[1][0];   
+        let res=await user.findByPk(_id);
+        if(!res)
+            throw createHttpError(404,`User with id=${_id} not found`);
+        for(let key in payload){
+            if(key!="id")
+                res[key]=payload[key];
+        }
+        try{
+            await res.save();
         }
         catch(e){
-            throw createHttpError(400,"Wrong format name user");
-        }     
+            throw createHttpError(400,"Bad format question");
+        }
+        return res;    
     },
     findAll:async()=>{
         return await user.findAll();

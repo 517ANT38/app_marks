@@ -10,10 +10,20 @@ module.exports=({question,objectSight})=>({
         }
     },
     update:async(_id,payload)=>{
-        let res=await question.update(payload,{where:{id:_id}});
-        if(res[0]==0)
+        let res=await question.findByPk(_id);
+        if(!res)
             throw createHttpError(404,`Question with id=${_id} not found`);
-        return res[1][0]; 
+        for(let key in payload){
+            if(key!="id")
+                res[key]=payload[key];
+        }
+        try{
+            await res.save();
+        }
+        catch(e){
+            throw createHttpError(400,"Bad format question");
+        }
+        return res;    
     },
     findAll:async()=>{
         return await question.findAll({include:objectSight});

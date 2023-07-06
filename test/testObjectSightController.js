@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const fs=require("fs");
 const {app} = require('../index');
 const {  clearDB, createTestObjectSight } = require("../util/util");
-const { objectSight } = require("../services");
+const { objectSight,address} = models;
 const path = require("path");
 
 const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
@@ -21,7 +21,7 @@ describe("ObjectSight",()=>{
     describe("/POST objectSights",()=>{  
 
         it("it should POST METHOD for create objectSight....", ()=>{
-            createTestObjectSight(objectSight,res).then(x=>{
+            createTestObjectSight(objectSight,address,res).then(x=>{
                 
                     chai.request(app)
                     .post("/api/objectSights/new")

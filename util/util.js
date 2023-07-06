@@ -1,6 +1,7 @@
 const { randomUUID } = require("crypto");
 const fs=require("fs/promises");
 const path = require("path");
+const { UUID } = require("sequelize");
 const base64ToBuffer = s=>Buffer.from(s,'base64');
 
 const bufferToBase64=theBuff=>theBuff.toString('base64');
@@ -37,7 +38,7 @@ const clearDB=async (models)=>{
             
             await models[key].destroy({
                 where: {},
-                truncate: true
+                truncate: false
               })
         }
 }
@@ -50,19 +51,23 @@ async function createTestQuestion(count,id_obj,creater){
         });
         
     }
-    await creater.bulkCreate(arr);
+    return await creater.bulkCreate(arr);
    
 }
-async function createTestObjectSight(creater,img){
-    return await creater.create({
+async function createTestObjectSight(createrObjS,createAddress,img){
+    
+    let r=await createAddress.create({
+        address:"safhjksdhgjkdhsjkghsdhgjk ",
+        x:82.22,
+        y:78.9
+    });
+    let name=randomUUID()+".bin";
+    await fs.writeFile(path.join("./static",name),Buffer.from(img,'base64'));
+    return await createrObjS.create({
         name:"hrjekrek",
         description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
-        img:img.toString('base64'),
-        address:{
-            address:"safhjksdhgjkdhsjkghsdhgjk ",
-            x:82.22,
-            y:78.9
-        }
+        urlImg:name,
+        addressId:r.id
     });
 }
 

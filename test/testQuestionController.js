@@ -8,10 +8,9 @@ const chaiHttp = require('chai-http');
 const {   clearDB, createTestObjectSight, createTestQuestion } = require("../util/util");
 const path = require("path");
 
-const {objectSight,question}=models;
+const {objectSight,address,question}=models;
 const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
 chai.use(chaiHttp);
-
 
 
 
@@ -26,7 +25,7 @@ describe("Question",()=>{
     describe("/POST questions",()=>{
         it(" it should POST METHOD for create question with valid data",(done)=>{          
             
-            createTestObjectSight(objectSight,res).then(x=>{
+            createTestObjectSight(objectSight,address,res).then(x=>{
                 chai.request(app)
                 .post("/api/questions/new")
                 .send({
@@ -42,7 +41,7 @@ describe("Question",()=>{
         it(" it should POST METHOD for create question with wrong data",(done)=>{
            
             
-            createTestObjectSight(objectSight,res).then(x=>{
+            createTestObjectSight(objectSight,address,res).then(x=>{
                 chai.request(app)
                 .post("/api/questions/new")
                 .send({
@@ -58,9 +57,7 @@ describe("Question",()=>{
     });
     describe("/GET questions",()=>{
         it("it should GET METHOD for find all question",(done)=>{
-            
-            
-            asyncDataForGetAll().then((x)=>{
+            asyncDataForGetAll().finally(()=>{
                 chai.request(app)
                 .get("/api/questions")
                 .end((err,res)=>{
@@ -68,11 +65,51 @@ describe("Question",()=>{
                     
                     done();
                 });    
-            }).catch(x=>console.log(x));
+            });
             
         });
-    });
 
+        it("it should GET METHOD for find by id question",(done)=>{
+            asyncDataForGetAll(1).then(x=>{
+                
+                chai.request(app)
+                .get(`/api/questions/${x[0].dataValues.id}`)
+                .end((err,res)=>{
+                    
+                   chai.expect(res).status(200);     
+                });
+                done();
+            });
+        });
+
+        it("it should GET METHOD for not found by id question",(done)=>{
+       
+            chai.request(app)
+            .get(`/api/question/${718278}`)
+            .end((err,res)=>{
+                chai.expect(res).status(404);
+                done();     
+            });
+           
+        });
+    });
+    describe("/PATCH questions",()=>{
+        it("it should PATCH METHOD for find by id question",(done)=>{
+            const textTest="hello world";
+            asyncDataForGetAll(1).then(x=>{
+                
+                chai.request(app)
+                .patch(`/api/questions/${x[0].dataValues.id}`)
+                .send({text:textTest})
+                .end((err,res)=>{
+                   chai.expect(res).status(200);
+                   chai.expect(res.body).have.property("text").equal(textTest); 
+                   chai.expect(res.body).have.property("id").equal(x[0].dataValues.id);    
+                });
+                done();
+            });
+        });    
+    });
 
 
 });
@@ -83,6 +120,6 @@ describe("Question",()=>{
 
 async function asyncDataForGetAll(count=15){
     
-    let b= await createTestObjectSight(objectSight,res);
-    await createTestQuestion(count,b.id,question);
+    let b= await createTestObjectSight(objectSight,address,res);
+    return await createTestQuestion(count,b.id,question);
 }

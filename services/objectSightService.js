@@ -17,13 +17,30 @@ module.exports=({objectSight,address})=>({
         return await objectSight.findAll();
     },
     update:async(_id,playload)=>{
-        let count = await objectSight.count({ where: { id: _id } });
+        let r = await objectSight.findByPk(_id);
         const {addressP,...p}=playload;
-        if(count==0)
+        if(!r)
             throw createHttpError(404,`Object sight with id=${_id} not found`);
-        let res=await objectSight.update(p,{where:{id:_id}});
-        address.update(addressP,{where:{id:res[1][0].AddressId}});
-        return res[1][0];  
+        try{    
+            for(let key in p){
+                if(key!="id")
+                    r[key]=p[key];
+            }
+            await r.save();
+        }
+        catch(e){
+            throw createHttpError(400,"Bad format object sight");
+        }
+        try{
+            for(let key in p){
+                if(key!="id")
+                    r.address[key]=addressP[key];
+            }
+            await r.address.save();
+        }catch(e){
+            throw createHttpError(400,"Bad format address");
+        }
+        return r; 
     },
     
 });
