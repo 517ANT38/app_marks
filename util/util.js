@@ -29,6 +29,44 @@ const deleteFiles=async(directory)=>{
         await fs.unlink(path.join(directory, file));
     }
 }
+const fraz=()=>(Math.random() + 10).toString(36).substring(7);
+
+const clearDB=async (models)=>{
+        await deleteFiles("./static");
+        for (const key in models) {
+            
+            await models[key].destroy({
+                where: {},
+                truncate: true
+              })
+        }
+}
+async function createTestQuestion(count,id_obj,creater){
+    const arr=[];
+    for(let i=0;i<count;i++){
+        arr.push({
+            ObjectSightId:id_obj,
+            text:fraz()
+        });
+        
+    }
+    await creater.bulkCreate(arr);
+   
+}
+async function createTestObjectSight(creater,img){
+    return await creater.create({
+        name:"hrjekrek",
+        description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
+        img:img.toString('base64'),
+        address:{
+            address:"safhjksdhgjkdhsjkghsdhgjk ",
+            x:82.22,
+            y:78.9
+        }
+    });
+}
+
+
 
 
 module.exports={
@@ -36,5 +74,8 @@ module.exports={
     bufferToBase64,
     createNameFile,
     asyncHandler,
-    deleteFiles
+    clearDB,
+    fraz,
+    createTestObjectSight,
+    createTestQuestion
 }

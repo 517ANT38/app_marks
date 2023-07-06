@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 
-module.exports=({question})=>({
+module.exports=({question,objectSight})=>({
     add:async(payload)=>{
         try{
             return await question.create(payload);
@@ -16,11 +16,11 @@ module.exports=({question})=>({
         return res[1][0]; 
     },
     findAll:async()=>{
-        return await question.findAll();
+        return await question.findAll({include:objectSight});
     },
    
     findById:async(_id)=>{
-        let res=await question.findByPk(_id);
+        let res=await question.findByPk(_id,{include:objectSight});
         if(!res)
             throw createHttpError(404,`Question with id=${_id} not found`);
         return res; 

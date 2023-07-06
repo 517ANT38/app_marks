@@ -5,12 +5,10 @@ const question=({connection,types})=>{
             text:{
                 type:types.STRING(300),
                 allowNull:false,
-                validate:{
-                    len:[5,200]
-                }
+               
             },
             ObjectSightId:{
-                unique:true,
+                
                 type:types.INTEGER()
             }
         },

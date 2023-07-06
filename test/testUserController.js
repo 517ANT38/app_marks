@@ -6,18 +6,13 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 const {app} = require('../index');
-const { deleteFiles } = require("../util/util");
+const { clearDB } = require("../util/util");
 
 
 describe("Users",()=>{
-    deleteFiles("./static").catch(x=>console.error(x));
     beforeEach((done)=>{
-        for (const key in models) {
-            models[key].destroy({
-                where: {},
-                truncate: true
-              }).then(x=>done());
-        }
+        
+        clearDB(models).finally(()=>done());
         
     });
     describe("/POST users",()=>{

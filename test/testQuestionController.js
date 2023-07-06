@@ -5,7 +5,11 @@ const fs=require("fs");
 const {app} = require('../index');
 
 const chaiHttp = require('chai-http');
-const { deleteFiles } = require("../util/util");
+const {   clearDB, createTestObjectSight, createTestQuestion } = require("../util/util");
+const path = require("path");
+
+const {objectSight,question}=models;
+const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
 chai.use(chaiHttp);
 
 
@@ -14,31 +18,15 @@ chai.use(chaiHttp);
 describe("Question",()=>{
 
     beforeEach((done)=>{
-        deleteFiles("./static").catch(x=>console.error(x));
-        for (const key in models) {
-            
-            models[key].destroy({
-                where: {},
-                truncate: true
-              }).then(x=>done());
-        }
+        
+        clearDB(models).finally(()=>done());
         
     });
 
     describe("/POST questions",()=>{
-        it("create question with valid data",(done)=>{
-            const res=fs.readFileSync("D:/Test.jpg");
-            const {objectSight}=models;
-            objectSight.create({
-                name:"hrjekrek",
-                description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
-                img:res.toString('base64'),
-                address:{
-                    address:"safhjksdhgjkdhsjkghsdhgjk ",
-                    x:82.22,
-                    y:78.9
-                }
-            }).then(x=>{
+        it(" it should POST METHOD for create question with valid data",(done)=>{          
+            
+            createTestObjectSight(objectSight,res).then(x=>{
                 chai.request(app)
                 .post("/api/questions/new")
                 .send({
@@ -51,19 +39,10 @@ describe("Question",()=>{
                 });    
             });
         }); 
-        it("create question with wrong data",(done)=>{
-            const res=fs.readFileSync("D:/Test.jpg");
-            const {objectSight}=models;
-            objectSight.create({
-                name:"hrjekrek",
-                description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
-                img:res.toString('base64'),
-                address:{
-                    address:"safhjksdhgjkdhsjkghsdhgjk ",
-                    x:82.22,
-                    y:78.9
-                }
-            }).then(x=>{
+        it(" it should POST METHOD for create question with wrong data",(done)=>{
+           
+            
+            createTestObjectSight(objectSight,res).then(x=>{
                 chai.request(app)
                 .post("/api/questions/new")
                 .send({
@@ -77,8 +56,33 @@ describe("Question",()=>{
             });
         }); 
     });
-
+    describe("/GET questions",()=>{
+        it("it should GET METHOD for find all question",(done)=>{
+            
+            
+            asyncDataForGetAll().then((x)=>{
+                chai.request(app)
+                .get("/api/questions")
+                .end((err,res)=>{
+                    chai.expect(res).status(200);
+                    
+                    done();
+                });    
+            }).catch(x=>console.log(x));
+            
+        });
+    });
 
 
 
 });
+
+
+
+
+
+async function asyncDataForGetAll(count=15){
+    
+    let b= await createTestObjectSight(objectSight,res);
+    await createTestQuestion(count,b.id,question);
+}
