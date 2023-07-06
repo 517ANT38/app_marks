@@ -3,14 +3,15 @@ const models=require("../models");
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const fs=require("fs");
+const {app} = require('../index');
+const { deleteFiles } = require("../util/util");
 
 chai.use(chaiHttp);
-const {app} = require('../index');
-const path = require("path");
-let should = chai.should();
+const should = chai.should();
 
 describe("ObjectSight",()=>{
     beforeEach((done)=>{
+        deleteFiles("./static").catch(x=>console.error(x));
         for (const key in models) {
             models[key].destroy({
                 where: {},
@@ -19,16 +20,10 @@ describe("ObjectSight",()=>{
         }
         
     });
-    describe("/POST objectSights",()=>{   
-
-           
-   
-
-        
+    describe("/POST objectSights",()=>{  
 
         it("it should POST METHOD for create objectSight....", (done)=>{
             fs.readFile("D:/Test.jpg",(err,res)=>{
-                
                 
                 chai.request(app)
                 .post("/api/objectSights/new")
@@ -44,8 +39,7 @@ describe("ObjectSight",()=>{
                         },
 
                     }
-                )
-                
+                )                
                 .end((e,r)=>{
                                       
                     chai.expect(r).status(200); 

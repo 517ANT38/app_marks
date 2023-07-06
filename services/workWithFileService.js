@@ -14,7 +14,6 @@ module.exports=()=>({
         
         await fs.mkdir(path.join("./","static"),{recursive:true});
         await fs.writeFile(path.join("./","static",name),b);
-        console.log(path.join("./","static",name))
         return name;
     },
     read:async(uuid)=>{

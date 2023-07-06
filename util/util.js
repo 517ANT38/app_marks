@@ -1,5 +1,6 @@
 const { randomUUID } = require("crypto");
-
+const fs=require("fs/promises");
+const path = require("path");
 const base64ToBuffer = s=>Buffer.from(s,'base64');
 
 const bufferToBase64=theBuff=>theBuff.toString('base64');
@@ -23,9 +24,17 @@ const asyncHandler=func => async (req, res, next) => {
     }
 };
 
+const deleteFiles=async(directory)=>{
+    for (const file of await fs.readdir(directory)) {
+        await fs.unlink(path.join(directory, file));
+    }
+}
+
+
 module.exports={
     base64ToBuffer,
     bufferToBase64,
     createNameFile,
-    asyncHandler
+    asyncHandler,
+    deleteFiles
 }

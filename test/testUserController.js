@@ -1,14 +1,16 @@
 const { describe } = require("mocha");
 const models=require("../models");
-let chai = require('chai');
-let chaiHttp = require('chai-http');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 
 chai.use(chaiHttp);
-let {app} = require('../index');
+const {app} = require('../index');
+const { deleteFiles } = require("../util/util");
 
 
 describe("Users",()=>{
+    deleteFiles("./static").catch(x=>console.error(x));
     beforeEach((done)=>{
         for (const key in models) {
             models[key].destroy({
@@ -19,10 +21,6 @@ describe("Users",()=>{
         
     });
     describe("/POST users",()=>{
-
-       
-      
-        
 
         it("it should POST METHOD for create user with not name....",(done)=>{
             
@@ -36,10 +34,7 @@ describe("Users",()=>{
             })
             
         });
-           
-   
 
-        
 
         it("it should POST METHOD for create user with  name....",(done)=>{
             

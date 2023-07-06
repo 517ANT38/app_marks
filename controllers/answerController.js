@@ -1,4 +1,5 @@
-const {asyncHandler} = require('../util/util');
+const asyncHandler = require("express-async-handler");
+
 module.exports=({router,services,models})=>{
     const routers=router();
     const service=services.answer(models);

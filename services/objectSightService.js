@@ -25,11 +25,5 @@ module.exports=({objectSight,address})=>({
         address.update(addressP,{where:{id:res[1][0].AddressId}});
         return res[1][0];  
     },
-    delete:async(_id)=>{
-        let res=await question.findByPk(_id);
-        if(!res)
-            throw createHttpError(404,`Object sight with id=${_id} not found`);
-        await res.destroy();
-        return res;
-    }
+    
 });

@@ -1,5 +1,5 @@
 
-const {asyncHandler} = require('../util/util');
+const asyncHandler = require("express-async-handler");
 module.exports=({router,services,models})=>{
     const routers=router();
     const service=services.objectSight(models);
@@ -26,10 +26,7 @@ module.exports=({router,services,models})=>{
         const data=await service.update(req.params.id,req.body);
         res.send(data);
     }));
-    routers.delete("/:id",asyncHandler(async(req,res,next)=>{
-        const data=await service.delete(req.params.id);
-        res.send(data);
-    }));
+    
 
     return routers;
 };
