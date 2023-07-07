@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 
-module.exports=({question,objectSight})=>({
+module.exports=({question,objectSight,vQuestionCountStateAns})=>({
     add:async(payload)=>{
         try{
             return await question.create(payload);
@@ -36,5 +36,14 @@ module.exports=({question,objectSight})=>({
         if(!res)
             throw createHttpError(404,`Question with id=${_id} not found`);
         return res; 
-    }
+    },
+    findByIdQuestInfoAns:async(_id)=>{
+        let res= await vQuestionCountStateAns.findByPkDataAnswer(_id);
+        if(!res)
+            throw createHttpError(404,`Question with id=${_id} not found`);
+        return res; 
+    },
+    findAllQuestInfoAns:async()=>{
+        return await vQuestionCountStateAns.findAll();
+    },
 });

@@ -22,7 +22,7 @@ const vUserAnswer=({connection})=>{
             return await connection.query("select * from VNameCountAnswer");
         },
         findByPkDataAnswer:async(_id)=>{
-            return await connection.query("select * from VNameCountAnswer id=$1",_id);
+            return await connection.query("select * from VNameCountAnswer where id=$1",_id);
         },
         associate:(m)=>{}
     }
