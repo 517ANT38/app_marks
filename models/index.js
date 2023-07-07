@@ -4,6 +4,7 @@ const question=require("./question");
 const answer=require("./answer");
 const user=require("./user");
 const vUserAnswer=require("./vUserAnswer");
+const vQuestionCountStateAns=require("./vQuestionCountStateAns");
 const  init_model  = require("./init");
 
 
@@ -15,7 +16,8 @@ const models={
     question,
     user,
     answer,
-    vUserAnswer
+    vUserAnswer,
+    vQuestionCountStateAns
     
 }
 
