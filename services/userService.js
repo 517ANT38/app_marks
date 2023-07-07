@@ -42,7 +42,7 @@ module.exports=({user})=>({
                 name:_name
             }
         });
-        if(!res)
+        if(res.length==0)
             throw createHttpError(404,`User with name=${_name} not found`);
         return res;
     } 

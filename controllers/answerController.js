@@ -11,7 +11,7 @@ module.exports=({router,services,models})=>{
         const data=await service.findById(req.params.id);
         res.send(data);
     }));
-    routers.post("/new",asyncHandler(async(req,res)=>{
+    routers.post("/new",asyncHandler(async(req,res)=>{        
         const data=await service.add(req.body);
         res.send(data);
     }));

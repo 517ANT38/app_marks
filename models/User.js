@@ -9,8 +9,9 @@ const user=({connection,types})=>{
                 type:types.STRING(50),
                 allowNull:false,
                 validate:{
-                    is:"^[a-zA-Zа-яёА-ЯЁ]+$",
-                    len:[2,50]
+                    is:/^[a-zA-Zа-яёА-ЯЁ]+$/i,
+                    len:[2,50],
+                    notEmpty: true
                 }
             }
 

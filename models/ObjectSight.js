@@ -4,7 +4,14 @@ const objectSight=({connection,types})=>{
         'ObjectSight',
         {
             name:{
-                type:types.STRING()
+                type:types.STRING(80),
+                allowNull:false,
+                validate:{
+                    is:/^[a-zA-Zа-яёА-ЯЁ]+$/i,
+                    len:[2,50],
+                    notEmpty: true
+                }
+                
             },
             urlImg:{
                 type:types.STRING(80),        

@@ -7,7 +7,7 @@ module.exports=({router,services,models})=>{
         const data = await service.findAll();
         res.send(data);
     }));
-    routers.get("/name",expressAsyncHandler(async(req,res)=>{
+    routers.get("/name/:name",expressAsyncHandler(async(req,res)=>{
         const data=await service.findByName(req.params.name);
         res.send(data);
     }));

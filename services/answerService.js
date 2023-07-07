@@ -2,22 +2,16 @@ const createHttpError = require("http-errors");
 
 module.exports=({answer,vNameCountAnswer})=>({
     add:async(payload)=>{
+        
         return await answer.create(payload);
+        
     },
-    update:async(_id,payload)=>{
+    update:async(_id)=>{
         let res=await answer.findByPk(_id);
         if(!res)
             throw createHttpError(404,`Question with id=${_id} not found`);
-        for(let key in payload){
-            if(key!="id")
-                res[key]=payload[key];
-        }
-        try{
-            await res.save();
-        }
-        catch(e){
-            throw createHttpError(400,"Bad format question");
-        }
+        res.stateAnswer=!res.stateAnswer;
+        await res.save();
         return res;     
     },
     findAll:async()=>{

@@ -14,8 +14,8 @@ const router=express.Router;
 const app=express();
 expressOasGenerator.init(app, {});
 app.use("/images",express.static(__dirname+"/static"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 for(let name in controllers){
    app.use(`/api/${name}`,controllers[name]({router,services,models}));

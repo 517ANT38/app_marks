@@ -55,14 +55,16 @@ async function createTestQuestion(count,id_obj,creater){
    
 }
 async function createTestObjectSight(createrObjS,createAddress,img){
-    
+    let name=null;
     let r=await createAddress.create({
         address:"safhjksdhgjkdhsjkghsdhgjk ",
         x:82.22,
         y:78.9
     });
-    let name=randomUUID()+".bin";
-    await fs.writeFile(path.join("./static",name),Buffer.from(img,'base64'));
+    if(img){
+         name=randomUUID()+".bin";
+        await fs.writeFile(path.join("./static",name),Buffer.from(img,'base64'));
+    }
     return await createrObjS.create({
         name:"hrjekrek",
         description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
