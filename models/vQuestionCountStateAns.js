@@ -19,7 +19,7 @@ const vQuestionCountStateAns=({connection})=>{
             return await connection.query("select * from vQuestionCountStateAns");
         },
         findByPkDataAnswer:async(_id)=>{
-            return await connection.query("select * from vQuestionCountStateAns id=$1",_id);
+            return await connection.query("select * from vQuestionCountStateAns where id=$1",_id);
         },
         associate:(m)=>{}
     }
