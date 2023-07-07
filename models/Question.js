@@ -6,10 +6,6 @@ const question=({connection,types})=>{
                 type:types.STRING(300),
                 allowNull:false,
                
-            },
-            ObjectSightId:{
-                
-                type:types.INTEGER()
             }
         },
         {

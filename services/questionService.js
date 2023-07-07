@@ -26,7 +26,9 @@ module.exports=({question,objectSight})=>({
         return res;    
     },
     findAll:async()=>{
+        try{
         return await question.findAll({include:objectSight});
+        }catch(e){console.log(e)}
     },
    
     findById:async(_id)=>{

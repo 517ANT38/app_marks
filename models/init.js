@@ -7,6 +7,7 @@ module.exports=(models)=>{
         
     }
     for(let item in models_init){
+        
         models_init[item].associate(models_init);
     }
     (async()=>{

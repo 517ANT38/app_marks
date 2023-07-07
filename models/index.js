@@ -3,7 +3,7 @@ const objectSight=require("./objectSight");
 const question=require("./question");
 const answer=require("./answer");
 const user=require("./user");
-const vNameCountAnswer=require("./vNameCountAnswer");
+const vUserAnswer=require("./vUserAnswer");
 const  init_model  = require("./init");
 
 
@@ -14,7 +14,8 @@ const models={
     objectSight,
     question,
     user,
-    answer
+    answer,
+    vUserAnswer
     
 }
 

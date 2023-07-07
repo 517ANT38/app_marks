@@ -43,9 +43,7 @@ module.exports=({objectSight,address})=>({
             const aNew=address.build({...addressP,id:p.AddressId});
             await aNew.save();
         }
-        catch(e){
-            console.log(e)
-            throw createHttpError(400,"Bad format object sight");}
+        catch(e){throw createHttpError(400,"Bad format object sight");}
         return r; 
         
     },
