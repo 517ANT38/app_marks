@@ -24,6 +24,13 @@ module.exports=({router,services,models})=>{
         const data=await service.update(req.params.id,req.body);
         res.send(data);
     }));
-    
+    routers.get("/userInfoAns/:id",expressAsyncHandler(async(req,res)=>{
+        const data= await service.findByIdUserInfoAns(req.params.id);
+        res.send(data);
+    }));
+    routers.get("/userInfoAns",expressAsyncHandler(async(req,res)=>{
+        const data= await service.findAllUserInfoAns();
+        res.send(data);
+    }));
     return routers;
 };

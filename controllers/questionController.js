@@ -19,6 +19,13 @@ module.exports=({router,services,models})=>{
         const data=await service.update(req.params.id,req.body);
         res.send(data);
     }));
-    
+    routers.get("/vInfoAns/:id",asyncHandler(async(req,res)=>{
+        const data = await service.findByIdQuestInfoAns(req.params.id);
+        res.send(data);
+    }));
+    routers.get("/vInfoAns",asyncHandler(async(req,res)=>{
+        const data = await service.findAllQuestInfoAns();
+        res.send(data);
+    }));
     return routers;
 };

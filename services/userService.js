@@ -48,7 +48,7 @@ module.exports=({user,vUserAnswer})=>({
     },
     findByIdUserInfoAns:async(_id)=>{
         let res= await vQuestionCountStateAns.findByPkDataAnswer(_id);
-        if(!res)
+        if(res.length==0)
             throw createHttpError(404,`User with id=${_id} not found`);
         return res; 
     },
