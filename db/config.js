@@ -16,5 +16,6 @@ module.exports={
         dialect:process.env.DIALECT,
         password:process.env.PASSWORD_DB,
         host:process.env.HOST,
+        logging: false
     }
 }
