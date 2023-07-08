@@ -18,19 +18,24 @@ module.exports=({router,services,models})=>{
     routers.post("/new",expressAsyncHandler(async(req,res)=>{
         
         const data=await service.add(req.body);
-        res.send(data);
+        res.status(201).send(data);
     }));
     routers.patch("/:id",expressAsyncHandler(async(req,res)=>{
         const data=await service.update(req.params.id,req.body);
         res.send(data);
     }));
-    routers.get("/userInfoAns/:id",expressAsyncHandler(async(req,res)=>{
-        const data= await service.findByIdUserInfoAns(req.params.id);
-        res.send(data);
-    }));
-    routers.get("/userInfoAns",expressAsyncHandler(async(req,res)=>{
+    
+    routers.get("/userInfoAns/all",expressAsyncHandler(async(req,res)=>{
+        
         const data= await service.findAllUserInfoAns();
         res.send(data);
+        
+    }));
+    routers.get("/userInfoAns/:id",expressAsyncHandler(async(req,res)=>{
+       
+        const data= await service.findByIdUserInfoAns(req.params.id);
+        res.send(data);
+        
     }));
     return routers;
 };

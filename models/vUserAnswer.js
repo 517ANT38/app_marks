@@ -1,3 +1,4 @@
+const { QueryTypes } = require("sequelize");
 
 const textQuery=`
     select 
@@ -19,10 +20,15 @@ const vUserAnswer=({connection})=>{
             
         
         findAll:async()=>{
-            return await connection.query("select * from VNameCountAnswer");
+            return await connection.query("select * from vuseranswer",{type: QueryTypes.SELECT});
         },
         findByPkDataAnswer:async(_id)=>{
-            return await connection.query("select * from VNameCountAnswer where id=$1",_id);
+            return await connection.query("select * from vuseranswer where userid=?",
+              {
+                replacements: [_id],
+                type: QueryTypes.SELECT
+              }
+            );
         },
         associate:(m)=>{}
     }

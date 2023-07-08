@@ -6,7 +6,7 @@ const chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 const {app} = require('../index');
-const { clearDB } = require("../util/util");
+const { clearDB, createTestDataForUserInfoAns, lotOfUsers } = require("../util/util");
 const {user}=models;
 
 describe("Users",()=>{
@@ -38,7 +38,7 @@ describe("Users",()=>{
             .send({name:"Anton"})
             
             .end((e,r)=>{
-                chai.expect(r).status(200);  
+                chai.expect(r).status(201);  
                 done();
             })
      
@@ -75,12 +75,12 @@ describe("Users",()=>{
     });
     describe("/GET users",()=>{
         it("it should user by id",(done)=>{
-            lotOfUsers().then(x=>{
+            lotOfUsers(user).then(x=>{
                 chai.request(app)
                 .get("/api/users")
                 .end((err,res)=>{
                     chai.expect(res).status(200);
-                    chai.expect(res.body).have.property("length").equal(x);
+                    chai.expect(res.body).have.property("length").equal(x.length);
                     done();
                 });
             });
@@ -133,13 +133,39 @@ describe("Users",()=>{
 
 
     });
+    describe("/GET  user info answer",()=>{
+        it("it shold find all user info answer",(done)=>{
+            createTestDataForUserInfoAns(models).finally(()=>{
+               
+                chai.request(app)
+                .get(`/api/users/userInfoAns/all`)
+                .end((err,res)=>{
+                    
+                    chai.expect(res).status(200);
+                    done();
+                });
+               
+            });
+        });
+        it("it shold find by id user info answer",(done)=>{
+            createTestDataForUserInfoAns(models).then(({users})=>{
+               
+                chai.request(app)
+                .get(`/api/users/userInfoAns/${users[0]}`)
+                .end((err,res)=>{
+                    chai.expect(res).status(200);
+                    
+                });
+                done();
+            });
+        });
+    
+        
+
+       
+    });
+    
 });
  
 
-async function lotOfUsers(count=15){
-    for (let index = 0; index < count; index++) {
-        await user.create({name:"Anton"});
-        
-    }
-    return count;
-}
+

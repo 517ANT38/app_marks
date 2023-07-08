@@ -20,7 +20,7 @@ module.exports=({router,services,models})=>{
         
         d.urlImg=name;
         const data=await service.add(d);
-        res.send(data);
+        res.status(201).send(data);
     }));
     routers.patch("/:id",asyncHandler(async(req,res)=>{
         const data=await service.update(req.params.id,req.body);

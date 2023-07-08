@@ -4,7 +4,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const fs=require("fs");
 const {app} = require('../index');
-const {  clearDB, createTestObjectSight } = require("../util/util");
+const {  clearDB, createTestObjectSight, lotOfCreateTestObjs } = require("../util/util");
 const { objectSight,address} = models;
 const path = require("path");
 
@@ -37,7 +37,7 @@ describe("ObjectSight",()=>{
             .send(testDataObjS)                
             .end((e,r)=>{
                      
-                chai.expect(r).status(200); 
+                chai.expect(r).status(201); 
                 chai.expect(r.body).have.property("urlImg")
                 .to.not.equal(null)
                 .to.not.equals("");
@@ -116,7 +116,7 @@ describe("ObjectSight",()=>{
 
     describe("/GET objectSigth",()=>{
         it("it should GET PATCH METHOD",(done)=>{
-            lotOfCreateTestObjs().finally(()=>{
+            lotOfCreateTestObjs(models).finally(()=>{
                 chai.request(app)
                 .get("/api/objectSights")
                 .end((err,res)=>{
@@ -141,8 +141,3 @@ describe("ObjectSight",()=>{
     });
 
 }); 
-async function lotOfCreateTestObjs(count=10){
-    for(let i=0;i<count;i++){
-        await createTestObjectSight(objectSight,address,res);
-    }
-}

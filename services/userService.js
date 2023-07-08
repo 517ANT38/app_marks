@@ -47,12 +47,14 @@ module.exports=({user,vUserAnswer})=>({
         return res;
     },
     findByIdUserInfoAns:async(_id)=>{
-        let res= await vQuestionCountStateAns.findByPkDataAnswer(_id);
+        let res= await vUserAnswer.findByPkDataAnswer(_id);
         if(res.length==0)
             throw createHttpError(404,`User with id=${_id} not found`);
         return res; 
     },
     findAllUserInfoAns:async()=>{
-        return await vQuestionCountStateAns.findAll();
+        
+        return await vUserAnswer.findAll();
+        
     }
 });

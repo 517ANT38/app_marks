@@ -13,7 +13,7 @@ module.exports=({router,services,models})=>{
     }));
     routers.post("/new",asyncHandler(async(req,res)=>{        
         const data=await service.add(req.body);
-        res.send(data);
+        res.status(201).send(data);
     }));
     routers.patch("/:id",asyncHandler(async(req,res)=>{
         const data=await service.update(req.params.id,req.body);

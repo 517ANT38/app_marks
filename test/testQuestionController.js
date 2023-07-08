@@ -5,10 +5,10 @@ const fs=require("fs");
 const {app} = require('../index');
 
 const chaiHttp = require('chai-http');
-const {   clearDB, createTestObjectSight, createTestQuestion } = require("../util/util");
+const {   clearDB, createTestObjectSight, asyncDataForGetAll, createTestDataForUserInfoAns } = require("../util/util");
 const path = require("path");
 
-const {objectSight,address,question}=models;
+const {objectSight,address}=models;
 const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
 chai.use(chaiHttp);
 
@@ -33,7 +33,7 @@ describe("Question",()=>{
                     text:"Quetion questions"
                 })
                 .end((err,res)=>{
-                    chai.expect(res).status(200);
+                    chai.expect(res).status(201);
                     done();
                 });    
             });
@@ -57,7 +57,7 @@ describe("Question",()=>{
     });
     describe("/GET questions",()=>{
         it("it should GET METHOD for find all question",(done)=>{
-            asyncDataForGetAll().finally(()=>{
+            asyncDataForGetAll(models,10,res).finally(()=>{
                 chai.request(app)
                 .get("/api/questions")
                 .end((err,res)=>{
@@ -70,7 +70,7 @@ describe("Question",()=>{
         });
 
         it("it should GET METHOD for find by id question",(done)=>{
-            asyncDataForGetAll(1).then(x=>{
+            asyncDataForGetAll(models,1,res).then(x=>{
                 
                 chai.request(app)
                 .get(`/api/questions/${x[0].dataValues.id}`)
@@ -93,10 +93,36 @@ describe("Question",()=>{
            
         });
     });
+
+    describe("/GET question info",()=>{
+        it("it shold find all info question",(done)=>{
+            createTestDataForUserInfoAns(models).finally(()=>{
+                chai.request(app)
+                .get("/api/questions/vInfoAns/all")
+                .end((err,res)=>{
+                    chai.expect(res).status(200);
+                });
+                done();
+            });
+        });
+        it("it shold find by id info question",(done)=>{
+            createTestDataForUserInfoAns(models).then(({quests})=>{
+                chai.request(app)
+                .get(`/api/questions/vInfoAns/${quests[0]}`)
+                .end((err,res)=>{
+                    chai.expect(res).status(200);
+                });
+                done();
+            });
+        });
+    });
+
+
+
     describe("/PATCH questions",()=>{
         it("it should PATCH METHOD for find by id question",(done)=>{
             const textTest="hello world";
-            asyncDataForGetAll(1).then(x=>{
+            asyncDataForGetAll(models,1,res).then(x=>{
                 
                 chai.request(app)
                 .patch(`/api/questions/${x[0].dataValues.id}`)
@@ -118,8 +144,3 @@ describe("Question",()=>{
 
 
 
-async function asyncDataForGetAll(count=15){
-    
-    let b= await createTestObjectSight(objectSight,address,res);
-    return await createTestQuestion(count,b.id,question);
-}
