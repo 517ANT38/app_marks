@@ -15,14 +15,17 @@ const textQuery=`
 `;
 
 const vUserAnswer=({connection})=>{
+    const sync=async()=>connection.query(`create or replace view VUserAnswer as ${textQuery}`)
     return {
-        sync:async()=>connection.query(`create or replace view VUserAnswer as ${textQuery}`),
+        
             
         
         findAll:async()=>{
+            await sync();
             return await connection.query("select * from vuseranswer",{type: QueryTypes.SELECT});
         },
         findByPkDataAnswer:async(_id)=>{
+            await sync();
             return await connection.query("select * from vuseranswer where userid=?",
               {
                 replacements: [_id],

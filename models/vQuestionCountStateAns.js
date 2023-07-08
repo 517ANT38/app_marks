@@ -13,14 +13,20 @@ const textQuery=`
 `;
 
 const vQuestionCountStateAns=({connection})=>{
+    const sync=async()=>connection.query(`create or replace view vQuestionCountStateAns as ${textQuery}`);
     return {
-        sync:async()=>connection.query(`create or replace view vQuestionCountStateAns as ${textQuery}`),
+        
             
         
         findAll:async()=>{
+            
+            await sync();
             return await connection.query("select * from vQuestionCountStateAns",{type: QueryTypes.SELECT});
+            
         },
         findByPkDataAnswer:async(_id)=>{
+            
+            await sync();
             return await connection.query("select * from vQuestionCountStateAns where id=:id",
             {
               replacements: {id:_id},
