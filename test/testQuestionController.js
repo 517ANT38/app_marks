@@ -95,7 +95,7 @@ describe("Question",()=>{
     });
 
     describe("/GET question info",()=>{
-        it("it shold find all info question",(done)=>{
+        it("it shold GET METHOD find all info question",(done)=>{
             createTestDataForUserInfoAns(models).finally(()=>{
                 chai.request(app)
                 .get("/api/questions/vInfoAns/all")
@@ -105,7 +105,7 @@ describe("Question",()=>{
                 done();
             });
         });
-        it("it shold find by id info question",(done)=>{
+        it("it shold GET METHOD find by id info question",(done)=>{
             createTestDataForUserInfoAns(models).then(({quests})=>{
                 chai.request(app)
                 .get(`/api/questions/vInfoAns/${quests[0]}`)

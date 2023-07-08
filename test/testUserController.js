@@ -46,7 +46,7 @@ describe("Users",()=>{
           
     });
     describe("/PATCH  users",()=>{
-        it("it should update name user by id",(done)=>{
+        it("it should PATCH METHOD update name user by id",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -60,7 +60,7 @@ describe("Users",()=>{
             });
         });
     
-        it("it should update name user by bad id",(done)=>{
+        it("it should PATCH METHOD update name user by bad id",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -74,7 +74,7 @@ describe("Users",()=>{
         });
     });
     describe("/GET users",()=>{
-        it("it should user by id",(done)=>{
+        it("it should GET METHOD user by id",(done)=>{
             lotOfUsers(user).then(x=>{
                 chai.request(app)
                 .get("/api/users")
@@ -85,7 +85,7 @@ describe("Users",()=>{
                 });
             });
         });
-        it("it should find user by id",(done)=>{
+        it("it should GET METHOD find user by id",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -96,7 +96,7 @@ describe("Users",()=>{
                 });
             });
         });
-        it("it should find user by name",(done)=>{
+        it("it should GET METHOD find user by name",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -107,7 +107,7 @@ describe("Users",()=>{
                 });
             });
         });
-        it("it should find user by bad id",(done)=>{
+        it("it should GET METHOD find user by bad id",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -118,7 +118,7 @@ describe("Users",()=>{
                 });
             });
         });
-        it("it should find user by bad name",(done)=>{
+        it("it should GET METHOD find user by bad name",(done)=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
@@ -134,7 +134,7 @@ describe("Users",()=>{
 
     });
     describe("/GET  user info answer",()=>{
-        it("it shold find all user info answer",(done)=>{
+        it("it shold GET METHOD find all user info answer",(done)=>{
             createTestDataForUserInfoAns(models).finally(()=>{
                
                 chai.request(app)
@@ -147,7 +147,7 @@ describe("Users",()=>{
                
             });
         });
-        it("it shold find by id user info answer",(done)=>{
+        it("it shold GET METHOD find by id user info answer",(done)=>{
             createTestDataForUserInfoAns(models).then(({users})=>{
                
                 chai.request(app)

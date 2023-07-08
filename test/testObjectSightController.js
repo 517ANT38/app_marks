@@ -115,7 +115,7 @@ describe("ObjectSight",()=>{
 
 
     describe("/GET objectSigth",()=>{
-        it("it should GET PATCH METHOD",(done)=>{
+        it("it should GET  METHOD objectsSight",(done)=>{
             lotOfCreateTestObjs(models).finally(()=>{
                 chai.request(app)
                 .get("/api/objectSights")
@@ -126,7 +126,7 @@ describe("ObjectSight",()=>{
             });
         });
 
-        it("it should GET PATCH METHOD by id",(done)=>{
+        it("it should GET METHOD by id objectsSight",(done)=>{
             createTestObjectSight(objectSight,address,res).then(x=>{
                 const testDescription="Hello world";
                 x.description=testDescription;
