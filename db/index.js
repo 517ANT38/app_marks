@@ -4,5 +4,5 @@ const p=process.argv[process.argv.length-1]||"start";
 const connection=new Sequelize(config[p]);
 
 
-connection.sync()
+connection.sync();
 module.exports={connection:connection,types:DataTypes}
