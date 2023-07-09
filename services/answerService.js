@@ -29,7 +29,7 @@ module.exports=({answer,vNameCountAnswer})=>({
     findByIdUserAnswerDType:async(_id)=>{
         let res= await vNameCountAnswer.findByPk(_id);
         if(!res)
-            throw createHttpError(`User with ${_id} not found`);
+            throw createHttpError(404,`User with ${_id} not found`);
         return res;    
     }
 });
