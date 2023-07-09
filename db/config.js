@@ -7,7 +7,8 @@ module.exports={
         dialect:process.env.DIALECT_TEST,
         password:process.env.PASSWORD_DB_TEST,
         host:process.env.HOST_TEST,
-        logging: false
+        logging: false,
+        timezone: '+04:00'
     },
     start:{
         database:process.env.DB,
@@ -16,6 +17,7 @@ module.exports={
         dialect:process.env.DIALECT,
         password:process.env.PASSWORD_DB,
         host:process.env.HOST,
-        logging: false
+        logging: false,
+        timezone: '+04:00'
     }
 }
