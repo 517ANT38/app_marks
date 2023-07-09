@@ -23,7 +23,7 @@ module.exports=({router,services,models})=>{
         const data=await service.findByIdUserAnswerDType(req.params.id);
         res.send(data);
     }));
-    routers.get("/diff_answer_user",asyncHandler(async(req,res)=>{
+    routers.get("/diff_answer_user/all",asyncHandler(async(req,res)=>{
         const data=await service.findByIdUserAnswerDType(req.params.id);
         res.send(data);
     }));
