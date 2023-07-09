@@ -11,7 +11,7 @@ const bufferToBase64=theBuff=>theBuff.toString('base64');
 const createNameFile=(img)=>{
     const reg=/data:image\/[~_,\w]{2,}\;/g;
     const arr=reg.exec(img);  
-    console.log(img.substring(0,30));
+   
     
     let uuid=randomUUID();
     if(!arr)return uuid +".bin";
