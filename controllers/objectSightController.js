@@ -12,6 +12,10 @@ module.exports=({router,services,models})=>{
         const data=await service.findById(req.params.id);
         res.send(data);
     }));
+    routers.get("/name/:name",asyncHandler(async (req,res)=>{
+        const data=await service.findByName(req.params.name);
+        res.send(data);
+    }));
     routers.post("/new",asyncHandler(async(req,res)=>{
       
         const {img,...d}=req.body;

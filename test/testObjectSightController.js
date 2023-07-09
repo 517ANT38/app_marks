@@ -131,8 +131,18 @@ describe("ObjectSight",()=>{
                 const testDescription="Hello world";
                 x.description=testDescription;
                 chai.request(app)
-                .get(`/api/objectSights/${x.id}`)
-                .send(x)                
+                .get(`/api/objectSights/${x.id}`)                             
+                .end((e,r)=>chai.expect(r).status(200));
+                done();
+            }
+        );
+        });
+        it("it should GET METHOD by name objectsSight",(done)=>{
+            createTestObjectSight(objectSight,address,res).then(x=>{
+                const testDescription="Hello world";
+                x.description=testDescription;
+                chai.request(app)
+                .get(`/api/objectSights/name/${x.name}`)           
                 .end((e,r)=>chai.expect(r).status(200));
                 done();
             }

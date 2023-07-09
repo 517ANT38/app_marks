@@ -1,4 +1,5 @@
 const createHttpError = require("http-errors");
+const { Op } = require("sequelize");
 
 
 module.exports=({user,vUserAnswer})=>({
@@ -39,7 +40,7 @@ module.exports=({user,vUserAnswer})=>({
     findByName:async(_name)=>{
         let res= await user.findAll({
             where:{
-                name:_name
+                name:{[Op.like]:`${_name}%`}
             }
         });
         if(res.length==0)

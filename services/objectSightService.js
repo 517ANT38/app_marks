@@ -1,5 +1,5 @@
 const createHttpError = require("http-errors");
-
+const {Op}=require("sequelize");
 module.exports=({objectSight,address})=>({
     add:async(playload)=>{
         try{
@@ -22,6 +22,18 @@ module.exports=({objectSight,address})=>({
             throw createHttpError(404,`Object sight with id=${_id} not found`); 
         return res;    
     },
+    findByName:async(_name)=>{
+        let res= await objectSight.findAll({
+            where:{
+                name:{[Op.like]:`${_name}%`}
+            }
+        });
+        if(res.length==0){
+            throw createHttpError(404,`Object sight with name=${_name} not found`)
+        }
+        return res;
+    },
+
     findAll:async()=>{
         return await objectSight.findAll();
     },
