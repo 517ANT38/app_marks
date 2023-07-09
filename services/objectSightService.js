@@ -2,8 +2,7 @@ const createHttpError = require("http-errors");
 const {Op}=require("sequelize");
 module.exports=({objectSight,address})=>({
     add:async(playload)=>{
-        // if(!playload.addressP)
-        //     throw createHttpError(400,"Object sight bad format")
+        
         try{
             const {address:addressP,...p}=playload;  
             if(addressP){ 
