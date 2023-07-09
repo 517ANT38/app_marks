@@ -19,14 +19,15 @@ module.exports=({router,services,models})=>{
         const data=await service.update(req.params.id,req.body);
         res.send(data);
     }));
-    routers.get("/diff_answer_user/:id",asyncHandler(async(req,res)=>{
-        const data=await service.findByIdUserAnswerDType(req.params.id);
-        res.send(data);
-    }));
     routers.get("/diff_answer_user/all",asyncHandler(async(req,res)=>{
         const data=await service.findByIdUserAnswerDType(req.params.id);
         res.send(data);
     }));
+    routers.get("/diff_answer_user/:id",asyncHandler(async(req,res)=>{
+        const data=await service.findByIdUserAnswerDType(req.params.id);
+        res.send(data);
+    }));
+    
 
 
     return routers;
