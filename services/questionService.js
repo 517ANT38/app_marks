@@ -39,7 +39,7 @@ module.exports=({question,objectSight,vQuestionCountStateAns})=>({
     },
     findByIdQuestInfoAns:async(_id)=>{
         let res= await vQuestionCountStateAns.findByPkDataAnswer(_id);
-        if(!res)
+        if(res.length==0)
             throw createHttpError(404,`Question with id=${_id} not found`);
         return res; 
     },
