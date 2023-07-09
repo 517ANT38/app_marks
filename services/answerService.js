@@ -20,7 +20,7 @@ module.exports=({answer,vNameCountAnswer})=>({
     findById:async(_id)=>{
         let res= await answer.findByPk(_id);
         if(!res)
-            throw createHttpError(`Answer with ${_id} not found`);
+            throw createHttpError(404,`Answer with ${_id} not found`);
         return res;
     },
     findAllCountAnswerDType:async()=>{
