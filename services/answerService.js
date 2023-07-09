@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 
-module.exports=({answer,vNameCountAnswer})=>({
+module.exports=({answer})=>({
     add:async(payload)=>{
         
         return await answer.create(payload);
@@ -23,13 +23,5 @@ module.exports=({answer,vNameCountAnswer})=>({
             throw createHttpError(404,`Answer with ${_id} not found`);
         return res;
     },
-    findAllCountAnswerDType:async()=>{
-        return await vNameCountAnswer.findAll();
-    },
-    findByIdUserAnswerDType:async(_id)=>{
-        let res= await vNameCountAnswer.findByPk(_id);
-        if(!res)
-            throw createHttpError(404,`User with ${_id} not found`);
-        return res;    
-    }
+    
 });
