@@ -9,7 +9,7 @@ const {   clearDB, createTestObjectSight, asyncDataForGetAll, createTestDataForU
 const path = require("path");
 
 const {objectSight,address}=models;
-const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
+const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg")).toString("base64");
 chai.use(chaiHttp);
 
 

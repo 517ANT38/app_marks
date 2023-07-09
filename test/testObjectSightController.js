@@ -8,7 +8,7 @@ const {  clearDB, createTestObjectSight, lotOfCreateTestObjs } = require("../uti
 const { objectSight,address} = models;
 const path = require("path");
 
-const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg"));
+const res=fs.readFileSync(path.join(process.env.FOLDER_TEST_DATA,"Test.jpg")).toString("base64");
 chai.use(chaiHttp);
 
 
@@ -62,7 +62,7 @@ describe("ObjectSight",()=>{
             .post("/api/objectSights/new")
             .send(testDataObjS)                
             .end((e,r)=>{
-                     
+                    
                 chai.expect(r).status(400); 
                 
                 done();
@@ -76,13 +76,19 @@ describe("ObjectSight",()=>{
     describe("/PATCH objectSights",()=>{  
 
         it("it should PATCH METHOD for upadate  objectSight by id", (done)=>{
-            createTestObjectSight(objectSight,address,res).then(x=>{
+            createTestObjectSight(objectSight,address,res).then((x)=>{
                     
                     const testDescription="Hello world";
-                    x.description=testDescription;
+                    const y={};
+                    y.description=testDescription;
+                    y.address={
+                        "address":"jksnnfmsnfmnsfm",
+                        "x":43.33,
+                        "y":17.22
+                    }
                     chai.request(app)
                     .patch(`/api/objectSights/${x.id}`)
-                    .send(x)                
+                    .send(y)                
                     .end((e,r)=>{
                                      
                         chai.expect(r).status(200); 
@@ -97,14 +103,20 @@ describe("ObjectSight",()=>{
                 }
             );
         });
-        it("it should PATCH METHOD for upadate  objectSight by bad id", (done)=>{
+        it("it should PATCH METHOD for update  objectSight by bad id", (done)=>{
             createTestObjectSight(objectSight,address,res).then(x=>{
-                  
+                    
                     const testDescription="Hello world";
-                    x.description=testDescription;
+                    const y={};
+                    y.description=testDescription;
+                    y.address={
+                        "address":"jksnnfmsnfmnsfm",
+                        "x":43.33,
+                        "y":17.22
+                    }
                     chai.request(app)
-                    .patch(`/api/objectSights/${2738}`)
-                    .send(x)                
+                    .patch(`/api/objectSights/${65}`)
+                    .send(y)                
                     .end((e,r)=>chai.expect(r).status(404));                    
                     done();
                 }

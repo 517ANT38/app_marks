@@ -49,17 +49,27 @@ module.exports=({objectSight,address})=>({
             throw createHttpError(404,`Object sight with id=${_id} not found`);
         try{    
             
-
-            const aNew=address.build({...addressP,id:p.AddressId});
-            await aNew.save();
-
+          
             for(let key in p){
                 if(key!="id")
                     r[key]=p[key];
-            }
-            r.AddressId=aNew.id;
+            }            
             await r.save();
-
+            if(!r.AddressId){
+                const a=await address.create(addressP);
+                r.AddressId=a.id;
+                await r.save();
+            }
+            else if(addressP){
+                const a=await address.findByPk(r.AddressId);
+                for(let key in addressP){
+                    if(key!="id"){
+                        
+                        a[key]=addressP[key];
+                    }
+                } 
+                await a.save();
+            }
         }
         catch(e){throw createHttpError(400,"Bad format object sight");}
         return r; 

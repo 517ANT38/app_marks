@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 module.exports=({router,services,models})=>{
     const routers=router();
     const service=services.objectSight(models);
-    const serviceFile=services.workFile();
+    const serviceFile=services.workFile(models);
     routers.get("/",asyncHandler(async(req,res)=>{
         const data = await service.findAll();
         res.send(data);
@@ -27,7 +27,12 @@ module.exports=({router,services,models})=>{
         res.status(201).send(data);
     }));
     routers.patch("/:id",asyncHandler(async(req,res)=>{
-        const data=await service.update(req.params.id,req.body);
+        const {img,...d}=req.body;
+        
+        const name=await serviceFile.rewrite(img,req.params.id);
+        
+        d.urlImg=name;
+        const data=await service.update(req.params.id,d);
         res.send(data);
     }));
     

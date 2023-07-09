@@ -2,15 +2,16 @@ const { randomUUID } = require("crypto");
 const fs=require("fs/promises");
 const path = require("path");
 const { UUID } = require("sequelize");
-const reg=/data:image\/[~_,\w]{2,}\;/g;
-const base64ToBuffer = s=>Buffer.from(s.replace(reg+/base64,/,""),'base64');
+
+const base64ToBuffer = s=> Buffer.from(s.replace(/data:image\/[~_,\w]{2,}\;base64,/g,""),'base64');
 
 const bufferToBase64=theBuff=>theBuff.toString('base64');
 
 
 const createNameFile=(img)=>{
-   
+    const reg=/data:image\/[~_,\w]{2,}\;/g;
     const arr=reg.exec(img);  
+    console.log(img.substring(0,30));
     
     let uuid=randomUUID();
     if(!arr)return uuid +".bin";
@@ -73,7 +74,7 @@ async function createTestObjectSight(createrObjS,createAddress,img){
         name:"hrjekrek",
         description:"hsjfhjgfhjsgfhgshf sfhjkshfjksjkfskf",
         urlImg:name,
-        addressId:r.id
+        AddressId:r.id
     });
 }
 async function createTestDataForAnswer(models,count=1,insert=false){
