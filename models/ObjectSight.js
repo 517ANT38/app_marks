@@ -7,7 +7,7 @@ const objectSight=({connection,types})=>{
                 type:types.STRING(80),
                 allowNull:false,
                 validate:{
-                    is:/^[a-zA-Zа-яёА-ЯЁ]+$/i,
+                    is:/^[a-zA-Zа-яёА-ЯЁ ]+$/i,
                     len:[2,50],
                     notEmpty: true
                 }

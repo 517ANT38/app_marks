@@ -12,7 +12,8 @@ const address=({connection,types})=>{
             y:{
                 type:types.DECIMAL(10,5)
             }
-        }
+        },
+        { timestamps: false }
     );
     res.associate=({objectSight})=>{
         res.hasOne(objectSight);

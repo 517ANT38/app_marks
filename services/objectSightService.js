@@ -2,11 +2,14 @@ const createHttpError = require("http-errors");
 const {Op}=require("sequelize");
 module.exports=({objectSight,address})=>({
     add:async(playload)=>{
+        // if(!playload.addressP)
+        //     throw createHttpError(400,"Object sight bad format")
         try{
-            const {addressP,...p}=playload;   
-            let r= await address.create(addressP);
-            p.AddressId=r.id;
-           
+            const {address:addressP,...p}=playload;  
+            if(addressP){ 
+                let r= await address.create(addressP);
+                p.AddressId=r.id;
+            }
             return await objectSight.create(p);
         }
         catch(e){
@@ -17,7 +20,7 @@ module.exports=({objectSight,address})=>({
         
     },
     findById:async(_id)=>{
-        let res= await objectSight.findByPk(_id);
+        let res= await objectSight.findByPk(_id,{include:address});
         if(!res)
             throw createHttpError(404,`Object sight with id=${_id} not found`); 
         return res;    
@@ -26,7 +29,8 @@ module.exports=({objectSight,address})=>({
         let res= await objectSight.findAll({
             where:{
                 name:{[Op.like]:`${_name}%`}
-            }
+            },
+            include:address
         });
         if(res.length==0){
             throw createHttpError(404,`Object sight with name=${_name} not found`)
@@ -35,7 +39,7 @@ module.exports=({objectSight,address})=>({
     },
 
     findAll:async()=>{
-        return await objectSight.findAll();
+        return await objectSight.findAll({include:address});
     },
     update:async(_id,playload)=>{
        
@@ -45,15 +49,18 @@ module.exports=({objectSight,address})=>({
         if(!r)
             throw createHttpError(404,`Object sight with id=${_id} not found`);
         try{    
+            
+
+            const aNew=address.build({...addressP,id:p.AddressId});
+            await aNew.save();
+
             for(let key in p){
                 if(key!="id")
                     r[key]=p[key];
             }
-            r.validate();
+            r.AddressId=aNew.id;
             await r.save();
 
-            const aNew=address.build({...addressP,id:p.AddressId});
-            await aNew.save();
         }
         catch(e){throw createHttpError(400,"Bad format object sight");}
         return r; 
