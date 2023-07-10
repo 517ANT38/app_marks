@@ -21,10 +21,10 @@ module.exports=({objectSight})=>({
         return bufferToBase64(b);
     },
     rewrite:async(data,_id)=>{
-        try{
+        
         const res=await objectSight.findByPk(_id);
         if(!res)
-            throw createHttpError(404,`ObjectSight with id=${_id} not found`);
+            return "";
         if(!data || data.length==0)return res.urlImg;
     
         
@@ -33,9 +33,6 @@ module.exports=({objectSight})=>({
         await fs.rename(path.join("./","static",res.urlImg),path.join("./","static",name));
         await fs.writeFile(path.join("./","static",name),b,{flag:"w"});
         return name;
-        }
-        catch(e){
-            console.log(e);
-        }
+        
     }
 });

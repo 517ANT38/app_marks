@@ -62,13 +62,15 @@ module.exports=({objectSight,address})=>({
             }
             else if(addressP){
                 const a=await address.findByPk(r.AddressId);
-                for(let key in addressP){
-                    if(key!="id"){
-                        
-                        a[key]=addressP[key];
-                    }
-                } 
-                await a.save();
+                if(a){
+                    for(let key in addressP){
+                        if(key!="id"){
+                            
+                            a[key]=addressP[key];
+                        }
+                    } 
+                    await a.save();
+                }
             }
         }
         catch(e){throw createHttpError(400,"Bad format object sight");}

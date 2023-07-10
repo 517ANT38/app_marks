@@ -1,7 +1,7 @@
 
 const express = require("express");
 
-const expressOasGenerator = require('express-oas-generator');
+
 
 const bodyParser=require("body-parser");
 const models=require("./models");
@@ -12,7 +12,7 @@ const services=require("./services");
 const PORT = process.env.PORT || 8080;
 const router=express.Router;
 const app=express();
-expressOasGenerator.init(app, {});
+
 app.use("/images",express.static(__dirname+"/static"));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
