@@ -16,10 +16,7 @@ module.exports=({objectSight})=>({
         await fs.writeFile(path.join("./","static",name),b);
         return name;
     },
-    read:async(uuid)=>{
-        let b=await fs.readFile(path.join(__dirname,"static",uuid,".jpg"));
-        return bufferToBase64(b);
-    },
+    
     rewrite:async(data,_id)=>{
         
         const res=await objectSight.findByPk(_id);
