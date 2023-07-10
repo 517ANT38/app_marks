@@ -1,7 +1,6 @@
 const { randomUUID } = require("crypto");
 const fs=require("fs/promises");
 const path = require("path");
-const { UUID } = require("sequelize");
 
 const base64ToBuffer = s=> Buffer.from(s.replace(/data:image\/[~_,\w]{2,}\;base64,/g,""),'base64');
 
