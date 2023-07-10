@@ -125,12 +125,12 @@ describe("Question",()=>{
             asyncDataForGetAll(models,1,res).then(x=>{
                 
                 chai.request(app)
-                .patch(`/api/questions/${x[0].dataValues.id}`)
+                .patch(`/api/questions/${x[0].id}`)
                 .send({text:textTest})
                 .end((err,res)=>{
                    chai.expect(res).status(200);
                    chai.expect(res.body).have.property("text").equal(textTest); 
-                   chai.expect(res.body).have.property("id").equal(x[0].dataValues.id);    
+                   chai.expect(res.body).have.property("id").equal(x[0].id);    
                 });
                 done();
             });

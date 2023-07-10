@@ -115,7 +115,7 @@ describe("ObjectSight",()=>{
                         "y":17.22
                     }
                     chai.request(app)
-                    .patch(`/api/objectSights/${65}`)
+                    .patch(`/api/objectSights/${x.id+1}`)
                     .send(y)                
                     .end((e,r)=>chai.expect(r).status(404));                    
                     done();

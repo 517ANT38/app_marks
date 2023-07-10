@@ -64,7 +64,7 @@ describe("Users",()=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
-                .patch(`/api/users/${13324}`)
+                .patch(`/api/users/${x.id+1}`)
                 .send({name:"Ant"})
                 .end((err,res)=>{
                     chai.expect(res).status(404);
@@ -111,7 +111,7 @@ describe("Users",()=>{
             user.create({name:"Anton"})
             .then(x=>{
                 chai.request(app)
-                .get(`/api/users/${378429}`)
+                .get(`/api/users/${x.id+1}`)
                 .end((err,res)=>{
                     chai.expect(res).status(404);                   
                     done();
