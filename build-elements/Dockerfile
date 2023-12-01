@@ -3,10 +3,11 @@ FROM node
 
 ARG APP_DIR=workspace
 ARG APPUSER=ant
-ARG APPGROUP=gant
+ARG APPGROUP=ant
 
 RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
+
 
 COPY app app
 COPY index.js .
@@ -16,7 +17,12 @@ COPY --chmod=0755 build-elements/run.sh run.sh
 RUN npm install
 
 RUN addgroup --system ${APPGROUP} && adduser  --ingroup ${APPGROUP} --system ${APPUSER}
+RUN mkdir /${APP_DIR}/static
+VOLUME /${APP_DIR}/static
+RUN chown -R ${APPUSER}:${APPGROUP} /${APP_DIR}
 USER ${APPUSER}
+
+
 
 EXPOSE 4567
 ENTRYPOINT [ "./run.sh" ]
