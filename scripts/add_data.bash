@@ -26,7 +26,7 @@ do
     r2=$(curl --ipv4 --location 'http://localhost:4567/api/users/new' \
     --header 'Content-Type: application/json' \
     --data "{
-        \"name\":\"Username $i\"
+        \"name\":\"Username\"
     }");
 
     
