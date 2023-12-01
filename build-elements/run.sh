@@ -1,2 +1,3 @@
+#!/bin/sh
 echo "Entrypoint sh script started"
-npm dstart
+node index.js dock
