@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser=require("body-parser");
-const models=require("./models");
-const controllers=require("./controllers");
-const services=require("./services");
+const models=require("./app/models");
+const controllers=require("./app/controllers");
+const services=require("./app/services");
 
 
 const PORT = process.env.PORT || 8080;
