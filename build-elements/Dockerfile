@@ -22,7 +22,4 @@ VOLUME /${APP_DIR}/static
 RUN chown -R ${APPUSER}:${APPGROUP} /${APP_DIR}
 USER ${APPUSER}
 
-
-
-EXPOSE 4567
 ENTRYPOINT [ "./run.sh" ]
