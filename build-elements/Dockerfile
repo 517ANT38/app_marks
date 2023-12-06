@@ -4,8 +4,6 @@ FROM node
 ARG APP_DIR=workspace
 ARG APPUSER=ant
 ARG APPGROUP=ant
-
-RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
 
 
