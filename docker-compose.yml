@@ -5,12 +5,13 @@ services:
     image: postgres
     container_name: db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${USERNAME_DB_DOCKER}
+      POSTGRES_PASSWORD: ${PASSWORD_DB_DOCKER}
     volumes:
       - ./infrastructure/db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-    ports:
-      - 5432:5432
+    
+    networks:
+      - docker-network
     
   bakend:
     image: app/appmarks
@@ -19,14 +20,21 @@ services:
       - 4567:4567
     depends_on:
       - service-db
+    networks:
+      - docker-network
   
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     ports:
       - "5050:80"
     depends_on:
       - service-db
+    networks:
+      - docker-network
+  networks:
+    docker-network:
+      driver: bridge
