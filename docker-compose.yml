@@ -15,7 +15,7 @@ services:
     image: app/appmarks
     container_name: bakend
     ports:
-      - 4567:4567
+      - ${PORT}:${PORT}
     depends_on:
       - db
     networks:
