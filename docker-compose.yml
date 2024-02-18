@@ -15,7 +15,6 @@ services:
   bakend:
     image: app/appmarks
     container_name: bakend
-    restart: always
     ports:
       - ${PORT}:${PORT}
     depends_on:

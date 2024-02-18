@@ -1,4 +1,4 @@
 #!/bin/sh
 echo "Entrypoint sh script started"
-exec node index.js dock
+sleep 5 && exec node index.js dock
 
