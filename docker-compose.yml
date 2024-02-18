@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     image: postgres
-    container_name: db
+    container_name: ${HOST_DOCKER}
     environment:
       POSTGRES_USER: ${USERNAME_DB_DOCKER}
       POSTGRES_PASSWORD: ${PASSWORD_DB_DOCKER}
@@ -23,18 +23,7 @@ services:
     networks:
       - dbnet
   
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    networks:
-      - dbnet
+  
 
 networks:
   dbnet:
