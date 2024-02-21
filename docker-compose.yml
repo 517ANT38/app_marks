@@ -3,10 +3,9 @@ version: '3.7'
 services:
   db:
     image: postgres
-    container_name: ${HOST_DOCKER}
-    environment:
-      POSTGRES_USER: ${USERNAME_DB_DOCKER}
-      POSTGRES_PASSWORD: ${PASSWORD_DB_DOCKER}
+    container_name: servicedb
+    env_file:
+      - ./envs/postgres.env
     volumes:
       - ./infrastructure/db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql    
     networks:
@@ -16,12 +15,14 @@ services:
     image: app/appmarks
     container_name: bakend
     ports:
-      - ${PORT}:${PORT}
+      - 4567:4567
+    env_file:
+      - ./envs/app.env    
     depends_on:
       - db
     networks:
       - dbnet
-  
+
   
 
 networks:

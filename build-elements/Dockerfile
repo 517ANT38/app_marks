@@ -9,7 +9,6 @@ WORKDIR ${APP_DIR}
 
 COPY app app
 COPY index.js .
-COPY .env .env
 COPY package.json package.json
 COPY --chmod=0755 build-elements/run.sh run.sh
 RUN npm install
