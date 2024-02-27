@@ -3,7 +3,7 @@ const bodyParser=require("body-parser");
 const models=require("./app/models");
 const controllers=require("./app/controllers");
 const services=require("./app/services");
-
+const db =require("./app/db")
 
 const PORT = process.env.PORT;
 const router=express.Router;
@@ -34,8 +34,15 @@ app.use((err,req,res,next)=>{
 });
 
 
-app.listen(PORT,()=>{
+const server = app.listen(PORT,()=>{
    console.log(`Simple Express app listening on port ${PORT}!`)
 });
 
+process.on('SIGINT', () => {
+   db.connection.close().then(x=>{
+      server.close(() => {
+         console.log('Server stop');
+      });
+   })
+});
 module.exports.app=app;

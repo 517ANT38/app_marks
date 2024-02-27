@@ -6,6 +6,8 @@ services:
     container_name: servicedb
     env_file:
       - ./envs/postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - dbnet
     
@@ -21,7 +23,8 @@ services:
     networks:
       - dbnet
 
-  
+volumes:
+  postgres_data:  
 
 networks:
   dbnet:
