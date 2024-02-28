@@ -38,14 +38,14 @@ const server = app.listen(PORT,()=>{
    console.log(`Simple Express app listening on port ${PORT}!`)
 });
 
-function closeApp(){
+function closeApp(signal){
    db.connection.close().then(x=>{
       server.close(() => {
-         console.log('Server stop');
+         console.log(`Server stop, signal ${signal}`);
       });
    })
 }
 
-process.on('SIGTERM', closeApp);
-process.on('SIGINT', closeApp);
+process.on('SIGTERM', (e) => closeApp(e));
+process.on('SIGINT', (e) => closeApp(e));
 module.exports.app=app;
