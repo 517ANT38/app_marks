@@ -33,7 +33,7 @@ const objectSight=({connection,types})=>{
                 unique:true
             }
         });    
-        res.hasOne(question);
+        res.hasMany(question);
     };
     return res;
 }

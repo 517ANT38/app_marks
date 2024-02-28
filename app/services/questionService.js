@@ -27,12 +27,12 @@ module.exports=({question,objectSight,vQuestionCountStateAns})=>({
     },
     findAll:async()=>{
        
-        return await question.findAll({include:objectSight});
+        return await question.findAll();
         
     },
    
     findById:async(_id)=>{
-        let res=await question.findByPk(_id,{include:objectSight});
+        let res=await question.findByPk(_id);
         if(!res)
             throw createHttpError(404,`Question with id=${_id} not found`);
         return res; 
