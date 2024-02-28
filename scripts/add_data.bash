@@ -6,13 +6,12 @@ do
     --header 'Content-Type: application/json' \
     --data "{
         \"img\":\"hdjshdj7348\",
-        \"name\":\"Space $i\",
+        \"name\":\"ObjTest\",
         \"description\":\"Lorem ipsum dolor s $i$i\",
         \"address\":{\"address\":\"Hello Hello\",\"x\":$i,\"y\":$i}
         
         }");
     id_obj=$(echo $r0 | jq -r '.id');
-
     r1=$(curl --ipv4 --location 'http://localhost:4567/api/questions/new' \
     --header 'Content-Type: application/json' \
     --data "{
