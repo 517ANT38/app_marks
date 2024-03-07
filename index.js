@@ -43,7 +43,7 @@ function closeApp(signal){
       server.close(() => {
          console.log(`Server stop, signal ${signal}`);
       });
-   })
+   }).catch(x=>console.log(x))
 }
 
 process.on('SIGTERM', (e) => closeApp(e));
