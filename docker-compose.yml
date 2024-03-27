@@ -20,11 +20,14 @@ services:
       - ./envs/app.env    
     depends_on:
       - db
+    volumes:
+      - imgs:/node_app/imgs
     networks:
       - dbnet
 
 volumes:
   postgres_data:  
+  imgs:
 
 networks:
   dbnet:

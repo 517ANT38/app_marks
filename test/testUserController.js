@@ -5,7 +5,8 @@ const chaiHttp = require('chai-http');
 
 
 chai.use(chaiHttp);
-const {app} = require('../index');
+const app = require('../app/app');
+
 const { clearDB, createTestDataForUserInfoAns, lotOfUsers } = require("../util/util");
 const {user}=models;
 

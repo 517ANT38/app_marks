@@ -2,7 +2,8 @@ const { beforeEach, describe } = require("mocha");
 const models=require("../models");
 const chai = require('chai');
 const fs=require("fs");
-const {app} = require('../index');
+const app = require('../app/app');
+
 
 const chaiHttp = require('chai-http');
 const {   clearDB, createTestObjectSight, asyncDataForGetAll, createTestDataForUserInfoAns } = require("../util/util");
