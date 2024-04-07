@@ -1,5 +1,5 @@
-const db=require("./db");
-const app = require("./app/app")
+const db=require("./app/db");
+const app = require("./app/app").app
 const PORT = process.env.PORT;
 const server = app.listen(PORT,()=>{
    console.log(`Simple Express app listening on port ${PORT}!`)
